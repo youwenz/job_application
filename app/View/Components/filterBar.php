@@ -21,6 +21,6 @@ class filterBar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.filter-bar');
+        return view('components.dashboard.filter-bar');
     }
 }

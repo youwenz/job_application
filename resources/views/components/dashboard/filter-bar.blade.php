@@ -22,7 +22,7 @@
         <!-- Right Section: Buttons -->
         <div class="flex space-x-4">
             <button class="border border-blue-200 text-secondary px-5 py-2 rounded">Sign In</button>
-            <button class="bg-secondary text-white px-5 py-2 rounded">Post A Job</button>
+            <button class="bg-secondary text-white px-5 py-2 rounded">Log In</button>
         </div>
     </div>
 </div>
