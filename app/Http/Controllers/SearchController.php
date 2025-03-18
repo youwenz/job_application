@@ -8,7 +8,7 @@ use App\Models\JobListing;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class JobListingController extends Controller
+class SearchController extends Controller
 {
     public function index(Request $request)
     {
