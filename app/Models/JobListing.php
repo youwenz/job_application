@@ -18,12 +18,10 @@ class JobListing extends Model
         'title',
         'description',
         'salary',
-        'tags',
         'job_type',
         'remote',
         'requirements',
         'benefits',
-        'company_id',
         'user_id'
     ];
 
@@ -49,4 +47,10 @@ class JobListing extends Model
     {
         return $this->hasMany(Application::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'job_listing_tag');
+    }
+
 }
