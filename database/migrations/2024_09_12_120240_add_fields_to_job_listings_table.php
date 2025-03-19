@@ -12,8 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Clear table data
-        DB::table('job_listings')->truncate();
+        // Check if the table exists before truncating
+        if (Schema::hasTable('job_listings')) {
+            // Clear table data
+            DB::table('job_listings')->truncate();
+        }
 
         Schema::table('job_listings', function (Blueprint $table) {
 
@@ -23,6 +26,10 @@ return new class extends Migration
             $table->boolean('remote')->default(false);
             $table->text('requirements')->nullable();
             $table->text('benefits')->nullable();
+
+            // Add user_id and company_id columns
+            $table->unsignedBigInteger('user_id'); // Add this line
+            $table->unsignedBigInteger('company_id')->nullable();
 
             // Add foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

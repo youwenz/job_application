@@ -9,7 +9,8 @@ return new class extends Migration {
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('userid')->nullable();//temporary
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('address')->nullable();
@@ -17,6 +18,11 @@ return new class extends Migration {
             $table->string('state')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('website')->nullable();
+            $table->string('company_size')->nullable();
+            $table->string('owner_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('country')->nullable();
+            $table->string('industry_type')->nullable();
             $table->timestamps();
         });
     }

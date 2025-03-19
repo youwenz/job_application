@@ -14,4 +14,5 @@ class EmployerController extends Controller
     {
         return view('employer.index');
     }
+
 }

@@ -20,18 +20,24 @@ class Company extends Model
         'city',
         'state',
         'zipcode',
-        'website'
+        'website',
+        'company_size',
+        'owner_name',
+        'phone',
+        'country',
+        'industry_type'
     ];
 
-    // a company belongs to a user
+    // A company belongs to a user
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // a company has many job listings
+    // A company has many job listings
     public function jobs(): HasMany
     {
         return $this->hasMany(JobListing::class);
     }
 }
+
