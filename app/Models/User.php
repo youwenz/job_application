@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(JobListing::class);
     }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class, 'user_id');
+    }
 }
