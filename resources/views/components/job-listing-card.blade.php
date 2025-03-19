@@ -8,17 +8,17 @@
     </div>
 
     <div class="flex justify-between items-center mt-2">
-        <div> 
-            <p class="text-gray-600 text-sm">{{ $jobListing->company->name }}</p>
+        <div>
+            <p class="text-gray-600 text-sm">{{ $jobListing->user->company->name }}</p>
             <div class="flex flex-row items-center mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.0" stroke="currentColor" class="size-5 opacity-50">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                 </svg>
-                <p class="text-gray-500 text-sm ml-2">{{ $jobListing->company->city }}</p>
+                <p class="text-gray-500 text-sm ml-2">{{ $jobListing->user->company->city }}</p>
             </div>
         </div>
-                        
+
         <!-- Bookmark Button -->
         <form action="{{ route('jobListings.bookmark', $jobListing->id) }}" method="POST" x-data="{ bookmarked: false }" @submit.prevent="bookmarked = !bookmarked">
             @csrf

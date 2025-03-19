@@ -19,7 +19,7 @@ class JobSeeder extends Seeder
         $jobListings = include database_path('seeders/data/job_listings.php');
 
         // Get all user IDs except the test user
-        $userIds = User::where('email', '!=', 'test@test.com')->pluck('id')->toArray();
+        $userIds = User::where('email', '!=', 'test@test.com')->where('role', 'employer')->pluck('id')->toArray();
 
         foreach ($jobListings as $listing) {
 
@@ -51,7 +51,6 @@ class JobSeeder extends Seeder
                 }
             }
         }
-
         echo "Jobs created successfully!";
     }
 }

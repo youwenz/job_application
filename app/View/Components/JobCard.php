@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class JobCard extends Component
 {
+    public $job;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($job)
     {
-        //
+        $this -> job = $job;
     }
 
     /**

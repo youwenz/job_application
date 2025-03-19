@@ -18,8 +18,9 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => null, //passing existing user
             'address' => $this->faker->streetAddress(),
+            'logo' => $this->faker->imageUrl(100, 100, 'business', true, 'logo'),
             'city' => $this->faker->city(),
             'state' => $this->faker->state(),
             'zipcode' => $this->faker->postcode(),

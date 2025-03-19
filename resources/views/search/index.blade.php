@@ -1,16 +1,17 @@
-<x-public-layout>
+<x-employee-layout>
     <div class="flex-1">
         <div class="flex flex-row pl-10 pt-8 bg-gray-100">
-            <div class="flex-col inline-flex w-[30%]">
+            <div class="flex-col inline-flex w-[30%] relative">
                 <p class="text-3xl font-bold mb-8">Filtered Jobs</p>
+                <!-- Filter Bar -->
                 <form method="GET" action="{{ route('search.index') }}" class="bg-gray-100 shadow rounded w-full">
-                    <div class="flex flex-wrap flex-col gap-4">
+                    <div class="flex flex-wrap flex-col gap-4 w-full">
                         <!-- Tags Filter -->
-                        <div class="relative">
+                        <div class="relative w-full">
                             <label onclick="toggleFilter('tags')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 w-full block">Tags</label>
                             <div id="tags"
-                                 class="hidden space-y-1 p-2 rounded bg-blue-100 grid grid-cols-2 gap-x-6 gap-y-2">
+                                 class="hidden space-y-1 p-2 rounded bg-gray-100 grid grid-cols-2 gap-x-6 gap-y-2">
                                 @foreach ($tags as $tag)
                                     <div class="flex items-center gap-2 mb-4 pl-4">
                                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
@@ -28,7 +29,7 @@
                             <label onclick="toggleFilter('states')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 w-full block">States</label>
                             <div id="states"
-                                 class="hidden space-y-1 p-2 rounded bg-blue-100 gird grid-cols-2 gap-x-6 gap-y-2">
+                                 class="hidden space-y-1 p-2 rounded bg-gray-100 grid grid-cols-2 gap-x-6 gap-y-2">
                                 @foreach ($states as $state)
                                     <div class="flex items-center gap-2 mb-4 pl-4">
                                         <input type="checkbox" name="states[]" value="{{ $state }}" id="{{ $state }}"
@@ -58,7 +59,7 @@
                         <div class="relative">
                             <label onclick="toggleFilter('remote')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 w-full block">Remote</label>
-                            <div id="remote" class="hidden space-y-1 p-2 rounded bg-blue-100">
+                            <div id="remote" class="hidden space-y-1 p-2 rounded bg-gray-100">
                                 <div class="flex items-center gap-2 mb-4 pl-4">
                                     <input type="checkbox" name="remote" value="yes" id="remote"
                                            class="appearance-none h-4 w-4 border border-gray-300 rounded-2xl checked:bg-secondary checked:border-transparent focus:ring-2 focus:ring-blue-500 cursor-pointer transition duration-200"/>
@@ -77,7 +78,7 @@
                             <label onclick="toggleFilter('jobType')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 block w-full">Job
                                 Type</label>
-                            <div id="jobType" class="hidden space-y-2 p-2 rounded bg-blue-100">
+                            <div id="jobType" class="hidden space-y-2 grid grid-cols-2 p-2 rounded bg-gray-100">
                                 @foreach (['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship', 'Volunteer', 'On-Call'] as $type)
                                     <div class="flex items-center gap-2 mb-4 pl-4">
                                         <input type="checkbox" name="states[]" value="{{ $type }}" id="{{ $type }}"
@@ -97,10 +98,10 @@
                     </div>
                 </form>
             </div>
-            <div class="grid grid-cols-2 p-8 space-x-4 space-y-4">
-                <x-job-card/>
-                <x-job-card/>
-                <x-job-card/>
+            <div class="grid grid-cols-1 md:grid-cols-2 p-8 gap-8 max-h-fit">
+                @foreach($jobs as $job)
+                <x-job-card :job="$job"/>
+                @endforeach
             </div>
         </div>
 
@@ -111,5 +112,5 @@
                 element.classList.toggle('hidden');
             }
         </script>
-
-</x-public-layout>
+    </div>
+</x-employee-layout>

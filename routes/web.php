@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/employer', [EmployerController::class, 'index']);
 
-Route::get('/jobs', [SearchController::class, 'index'])->name('search.index');
+Route::get('/jobs/search', [SearchController::class, 'index'])->name('search.index');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search.search');
 

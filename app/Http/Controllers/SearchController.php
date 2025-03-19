@@ -22,9 +22,12 @@ class SearchController extends Controller
         }
 
         // Filter by State
-        if ($request->filled('state')) {
-            $query->where('state', 'like', '%' . $request->state . '%');
+        if ($request->filled('states') && is_array($request->input('states'))) {
+            $query->whereHas('user.company', function ($subQuery) use ($request) {
+                $subQuery->whereIn('state', $request->input('states'));
+            });
         }
+
 
         // Filter by Salary Range
         if ($request->filled('min_salary')) {
@@ -35,9 +38,11 @@ class SearchController extends Controller
         }
 
         // Filter by Remote
-        if ($request->has('remote')) {
-            $query->where('remote', true);
+        if ($request->filled('remote')) {
+            $isRemote = $request->input('remote') === 'yes';
+            $query->where('remote', $isRemote);
         }
+
 
         // Filter by Job Type
         if ($request->filled('job_type')) {
@@ -52,6 +57,7 @@ class SearchController extends Controller
 
         // Get all states for filtering
         $states = Company::all()->pluck('state')->unique();
+
 
         return view('search.index', compact('jobs', 'tags', 'states'));
     }

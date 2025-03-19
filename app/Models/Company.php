@@ -14,6 +14,7 @@ class Company extends Model
         'user_id',
         'name',
         'description',
+        'logo',
         'address',
         'city',
         'state',
@@ -27,9 +28,4 @@ class Company extends Model
         return $this->belongsTo(User::class);
     }
 
-    // a company has many job listings
-    public function jobs(): HasMany
-    {
-        return $this->hasMany(JobListing::class);
-    }
 }
