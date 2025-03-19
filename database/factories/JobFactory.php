@@ -17,34 +17,29 @@ class JobSeeder extends Seeder
         // Load job listings from file
         $jobListings = include database_path('seeders/data/job_listings.php');
 
-        // Get test user id
-        $testUserId = User::where('email', 'test@test.com')->value('id');
-
-        // Get all other user ids from user model
+        // Get all user ids from user model
         $userIds = User::where('email', '!=', 'test@test.com')->pluck('id')->toArray();
 
         // Fetch all company IDs
         $companyIds = Company::pluck('id')->toArray();
 
-        foreach ($jobListings as $index => &$listing) {
-            if ($index < 2) {
-                // Assign the first two listings to the test user
-                $listing['user_id'] = $testUserId;
-            } else {
-                // Assign user id randomly from available users
-                $listing['user_id'] = $userIds[array_rand($userIds)];
+        // Process each job listing
+        foreach ($jobListings as &$listing) {
+
+            // Assign user id randomly from available users
+            $listing['user_id'] = $userIds[array_rand($userIds)];
+
+            // Format tags correctly
+            if (isset($listing['tags'])) {
+                $listing['tags'] = implode(', ', array_map('trim', explode(',', $listing['tags'])));
             }
 
-            // Assign company_id randomly from available companies
-            $listing['company_id'] = $companyIds[array_rand($companyIds)];
-
-            // Add missing columns and randomize them
-            $listing['salary'] = rand(40000, 120000);
-            $listing['tags'] = implode(', ', ['PHP', 'Laravel', 'Backend']);
-            $listing['job_type'] = collect(['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship', 'Volunteer', 'On-Call'])->random();
-            $listing['remote'] = (bool) rand(0, 1);
-            $listing['requirements'] = 'Requirements: ' . fake()->paragraph();
-            $listing['benefits'] = 'Benefits: ' . fake()->paragraph();
+            // Populate missing fields
+            $listing['salary'] = $listing['salary'] ?? rand(40000, 120000);
+            $listing['job_type'] = $listing['job_type'] ?? collect(['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship', 'Volunteer', 'On-Call'])->random();
+            $listing['remote'] = $listing['remote'] ?? (bool)rand(0, 1);
+            $listing['requirements'] = $listing['requirements'] ?? 'Requirements: ' . fake()->paragraph();
+            $listing['benefits'] = $listing['benefits'] ?? 'Benefits: ' . fake()->paragraph();
 
             // Add timestamps
             $listing['created_at'] = now();

@@ -25,7 +25,6 @@ class CompanyFactory extends Factory
             'zipcode' => $this->faker->postcode(),
             'name' => $this->faker->company(),
             'description' => $this->faker->paragraphs(2, true),
-            'logo' => $this->faker->imageUrl(100, 100, 'business', true, 'logo'),
             'website' => $this->faker->url(),
         ];
     }
