@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\User;
+use App\Models\Company;
+use App\Models\JobListing;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class JobSeeder extends Seeder
 {
@@ -16,28 +18,39 @@ class JobSeeder extends Seeder
         // Load job listings from file
         $jobListings = include database_path('seeders/data/job_listings.php');
 
-        // Get test user id
-        $testUserId = User::where('email', 'test@test.com')->value('id');
+        // Get all user IDs except the test user
+        $userIds = User::where('email', '!=', 'test@test.com')->where('role', 'employer')->pluck('id')->toArray();
 
-        // Get all other user ids from user model
-        $userIds = User::where('email', '!=', 'test@test.com')->pluck('id')->toArray();
+        foreach ($jobListings as $listing) {
 
-        foreach ($jobListings as $index => &$listing) {
-            if ($index < 2) {
-                // Assign the first two listings to the test user
-                $listing['user_id'] = $testUserId;
-            } else {
-                // Assign user id to listing
-                $listing['user_id'] = $userIds[array_rand($userIds)];
-            }
+            // Assign user and company IDs randomly
+            $listing['user_id'] = $userIds[array_rand($userIds)];
 
-            // Add timestamps
+            // Extract tags from the listing
+            $tags = $listing['tags'] ?? [];
+            unset($listing['tags']);  // Remove tags before creating the JobListing
+
+            // Populate missing fields
+            $listing['salary'] = $listing['salary'] ?? rand(40000, 120000);
+            $validJobTypes = ['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship', 'Volunteer', 'On-Call'];
+            $listing['job_type'] = $listing['job_type'] ?? collect($validJobTypes)->random();
+            $listing['remote'] = $listing['remote'] ?? (bool)rand(0, 1);
+            $listing['requirements'] = $listing['requirements'] ?? 'Requirements: ' . fake()->paragraph();
+            $listing['benefits'] = $listing['benefits'] ?? 'Benefits: ' . fake()->paragraph();
             $listing['created_at'] = now();
             $listing['updated_at'] = now();
-        }
 
-        // Insert job listings
-        DB::table('job_listings')->insert($jobListings);
-        echo 'Jobs created successfully!';
+            // Create the JobListing record in the database
+            $jobListing = JobListing::create($listing);
+
+            // Process and attach tags if they exist
+            if (!empty($tags)) {
+                foreach ($tags as $tagName) {
+                    $tag = Tag::firstOrCreate(['name' => $tagName]);
+                    $jobListing->tags()->attach($tag->id); // Attach tag to JobListing
+                }
+            }
+        }
+        echo "Jobs created successfully!";
     }
 }

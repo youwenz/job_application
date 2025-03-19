@@ -2,34 +2,24 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Company;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Disable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // Create 20 users with the role of 'employer' and their associated companies
+        User::factory()->count(20)->has(
+            Company::factory()->count(1)
+        )->create(['role' => 'employer']);
 
-        // Truncate tables
-        DB::table('job_user_bookmarks')->truncate();
-        DB::table('applicants')->truncate();
-        DB::table('job_listings')->truncate();
-        DB::table('users')->truncate();
+        // Create other users with the role of 'employee'
+        User::factory()->count(20)->create(['role' => 'employee']);
 
-        // Re-enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        // Run seeders
-        $this->call(TestUserSeeder::class);
-        $this->call(RandomUserSeeder::class);
+        // Call the JobSeeder to seed job listings
         $this->call(JobSeeder::class);
-        $this->call(BookmarkSeeder::class);
     }
 }
+

@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('userid')->nullable();//temporary
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('logo')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

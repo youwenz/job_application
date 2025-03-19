@@ -25,7 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'contact_number'
+        'contact_number',
+        'role'
     ];
 
     /**
@@ -70,9 +71,14 @@ class User extends Authenticatable
         return $this->hasOne(Company::class);
     }
 
-    // a user (employer only) has a job listing
+    // a user (employer only) has many job listing
     public function jobs(): HasMany
     {
         return $this->hasMany(JobListing::class);
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class, 'user_id');
     }
 }

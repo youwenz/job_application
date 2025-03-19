@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('job_user_bookmarks', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('job_id')->constrained('job_listings')->onDelete('cascade');
+            $table->foreignId('job_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +24,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_user_bookmarks');
+        Schema::table('job_user_bookmarks', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['job_id']);
+        });
+        
+        Schema::dropIfExists('bookmarks');
     }
 };

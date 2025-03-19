@@ -10,12 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Company extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'user_id',
         'name',
-        'logo',
         'description',
+        'logo',
         'address',
         'city',
         'state',
