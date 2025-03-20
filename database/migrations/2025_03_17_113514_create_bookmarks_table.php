@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('job_user_bookmarks', function (Blueprint $table) {
+        Schema::table('bookmarks', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['job_id']);
         });
