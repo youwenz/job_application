@@ -37,6 +37,8 @@ Route::get('jobs/{id}', [JobController::class, 'viewJob']); // View one job
 Route::post('jobs/{id}', [JobController::class, 'updateJob']); // Update job
 Route::get('jobs/delete/{id}', [JobController::class, 'deleteJob']); // Delete job
 
+
+
 Route::get('/jobs/search', [SearchController::class, 'index'])->name('search.index');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search.search');
