@@ -1,5 +1,5 @@
 <x-employer-layout>
-    <form action="{{ route('companies.createCompany') }}" method="POST">
+    <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="bg-white w-full h-screen flex items-center justify-center p-8">
             <div class="grid grid-cols-2 gap-6 w-full max-w-5xl">
@@ -21,6 +21,14 @@
                     <div class="mt-3">
                         <label class="text-gray-500 text-sm">Website (Optional)</label>
                         <input type="text" name="website" value="{{ old('website') }}" class="border rounded-lg p-3 mt-1 w-full font-semibold">
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="text-gray-500 text-sm">Company Logo</label>
+                        <input type="file" name="logo" accept=".jpeg,.jpg,.png,.gif" class="border rounded-lg p-3 mt-1 w-full">
+                        @error('logo')
+                            <p class="text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mt-3">
@@ -95,6 +103,7 @@
                             <option value="Manufacturing">Manufacturing</option>
                         </select>
                     </div>
+
                     <button type="submit" class="mt-5 bg-blue-600 text-white py-3 px-6 w-full rounded-lg" onclick="this.disabled=true; this.form.submit();">
                         Create Company
                     </button>
