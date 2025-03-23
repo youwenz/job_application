@@ -6,16 +6,16 @@
 
                 <!-- Navigation Links -->
                 <div class="sm:flex space-x-8 h-full ml-24 items-center">
-                    <a href="/employer" class="{{ request()->is('employer') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="/companies" class="{{ request()->is('employer') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Home
                     </a>
-                    <a href="/employer/jobs" class="{{ request()->is('jobs') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="/companies/jobs" class="{{ request()->is('jobs') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         My Jobs
                     </a>
-                    <a href="/jobs/create" class="{{ request()->is('jobs/create') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="/companies/jobs/create" class="{{ request()->is('jobs/create') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Post a Job
                     </a>
-                    <a href="/employer/applications" class="{{ request()->is('employer/applications') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="/companies/create" class="{{ request()->is('employer/applications') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Applications
                     </a>
                 </div>

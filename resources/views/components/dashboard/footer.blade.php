@@ -27,8 +27,8 @@
             <ul class="space-y-2">
                 <li><a href="#" class="hover:text-white">Post a Job</a></li>
                 <li><a href="#" class="hover:text-white">Browse Candidates</a></li>
-                <li><a href="#" class="hover:text-white">Employers Dashboard</a></li>
-                <li><a href="#" class="hover:text-white">Applications</a></li>
+                <li><a href="/companies" class="hover:text-white">Employers Dashboard</a></li>
+                <li><a href="/companies/create" class="hover:text-white">Applications</a></li>
             </ul>
         </div>
 
