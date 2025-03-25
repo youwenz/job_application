@@ -9,7 +9,7 @@
                     <a href="/" class="{{ request()->is('/') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Home
                     </a>
-                    <a href="/jobs" class="{{ request()->is('jobs') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="/jobs" class="{{ request()->is('jobs*') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Browse Jobs
                     </a>
                     <a href="/companies" class="{{ request()->is('companies*') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
