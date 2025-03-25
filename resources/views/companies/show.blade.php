@@ -1,4 +1,4 @@
-<x-employer-layout>
+<x-employee-layout>
     <div class="container mx-auto px-6 py-10 flex flex-col items-center">
         <div class="bg-white shadow-lg rounded-xl p-10 border border-gray-200 w-full max-w-2xl text-center">
             <div class="flex flex-col items-center">
@@ -37,6 +37,6 @@
             </a>
         </div>
     </div>
-</x-employer-layout>
+</x-employee-layout>
 
 

@@ -1,4 +1,4 @@
-<x-employer-layout>
+<x-employee-layout>
     <div class="container mx-auto p-6">
         <h2 class="text-2xl font-bold mb-4">Top Companies</h2>
 
@@ -31,5 +31,5 @@
             @endforeach
         </div>
     </div>
-</x-employer-layout>
+</x-employee-layout>
 
