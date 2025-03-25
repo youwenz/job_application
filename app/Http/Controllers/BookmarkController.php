@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bookmark;
-use App\Models\Job;
+use App\Models\JobListing; 
 use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
 {
+    public function index(Request $request)
+    {
+        // $user = Auth::user();
+        // $bookmarks = $user->bookmarks()->paginate(10);
+        $bookmarks = Bookmark::with('jobListing')->paginate(10);
+
+        return view('bookmark.index', compact('bookmarks'));
+    }
+
     public function save($jobId)
     {
         $user = Auth::user();
