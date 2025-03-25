@@ -8,37 +8,30 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
+// Landing page for pre-login
 Route::get('/', function () {
     return view('dashboard.index');
 });
 
-// Route::get('/employer', [EmployerController::class, 'index']);
+// Company Routes (Employer dashboard)
+Route::prefix('companies')->name('companies.')->group(function () {
+    Route::get('/', [CompanyController::class, 'index'])->name('index'); // List companies
+    Route::get('/create', [CompanyController::class, 'create'])->name('create'); // Create form
+    Route::post('/', [CompanyController::class, 'store'])->name('store'); // Store company
+    Route::get('/{id}', [CompanyController::class, 'viewCompany'])->name('show'); // View company
+    Route::post('/{id}', [CompanyController::class, 'updateCompany'])->name('update'); // Update company
+    Route::get('/delete/{id}', [CompanyController::class, 'deleteCompany'])->name('delete'); // Delete company
+});
 
-
-// Company Routes
-Route::get('/companies', [CompanyController::class, 'index']); // List companies
-
-Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create'); // Display the form to create a company
-Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
-
-
-Route::get('/companies/{id}', [CompanyController::class, 'viewCompany'])->name('companies.show');// View one company
-
-Route::post('/companies/{id}', [CompanyController::class, 'updateCompany']); // Update company
-Route::get('/companies/delete/{id}', [CompanyController::class, 'deleteCompany']); // Delete company
-
-// Job Routes
-Route::get('jobs', [JobController::class, 'index']); // List jobs
-
-Route::get('/companies/jobs/create', [JobController::class, 'create'])->name('jobs.create');// Display the form to create a job
-Route::post('/companies/Jobs', [JobController::class, 'createJob'])->name('jobs.createJob');
-
-Route::get('/companies/jobs/{id}', [JobController::class, 'viewJob']); // View one job
-
-Route::post('/companies/jobs/{id}', [JobController::class, 'updateJob']); // Update job
-Route::get('/companies/jobs/delete/{id}', [JobController::class, 'deleteJob']); // Delete job
-
-
+// Job Routes (Employer dashboard)
+Route::prefix('companies/jobs')->name('jobs.')->group(function () {
+    Route::get('/', [JobController::class, 'index'])->name('index'); // List jobs
+    Route::get('/create', [JobController::class, 'create'])->name('create'); // Create job form
+    Route::post('/', [JobController::class, 'createJob'])->name('store'); // Store job
+    Route::get('/{id}', [JobController::class, 'viewJob'])->name('show'); // View job
+    Route::post('/{id}', [JobController::class, 'updateJob'])->name('update'); // Update job
+    Route::get('/delete/{id}', [JobController::class, 'deleteJob'])->name('delete'); // Delete job
+});
 
 Route::get('/jobs/search', [SearchController::class, 'index'])->name('search.index');
 
