@@ -8,9 +8,15 @@
     
         <!-- Job Listings Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($jobListings as $job)
-                <x-job-listing-card :jobListing="$job" />
-            @endforeach
+            @if($jobListings->isEmpty())
+                <div class="text-center py-10">
+                    <p class="text-gray-500 text-lg">No jobs found.</p>
+                </div>
+            @else
+                @foreach($jobListings as $job)
+                    <x-job-listing-card :jobListing="$job" />
+                @endforeach
+            @endif
         </div>
 
         <!-- Pagination -->

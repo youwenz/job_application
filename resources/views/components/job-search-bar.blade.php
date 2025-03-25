@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('jobListings.list') }}" class="flex flex-wrap items-center border border-gray-300 rounded-lg overflow-hidden w-full p-2 mb-10">
+<form method="GET" action="{{ route('jobListings.index') }}" class="flex flex-wrap items-center border border-gray-300 rounded-lg overflow-hidden w-full p-2 mb-10">
     <!-- Job Title Input -->
     <div class="flex items-center flex-grow px-3">
         <span class="text-gray-500">
@@ -19,6 +19,33 @@
             </svg>
         </span>
         <input type="text" name="location" class="w-28 md:w-48 px-3 py-2 outline-none text-sm md:text-base truncate" placeholder="City, state or zip code" value="{{ request('location') }}">
+    </div>
+
+    <!-- Salary Range -->
+    <!-- <div class="hidden md:block h-8 w-px bg-gray-300"></div>
+    <div class="flex items-center px-3">
+        <input type="number" name="salary_min" class="w-24 md:w-32 px-3 py-2 outline-none text-sm md:text-base truncate" placeholder="Min Salary" value="{{ request('salary_min') }}">
+        <span class="mx-1 text-gray-500">-</span>
+        <input type="number" name="salary_max" class="w-24 md:w-32 px-3 py-2 outline-none text-sm md:text-base truncate" placeholder="Max Salary" value="{{ request('salary_max') }}">
+    </div> -->
+
+    <!-- Job Type -->
+    <div class="hidden sm:flex items-center px-3">
+        <select name="job_type" class="px-3 py-2 outline-none text-sm md:text-base bg-white border border-gray-200 rounded-md">
+            <option value="">Job Type</option>
+            <option value="full-time" {{ request('job_type') == 'full-time' ? 'selected' : '' }}>Full-Time</option>
+            <option value="part-time" {{ request('job_type') == 'part-time' ? 'selected' : '' }}>Part-Time</option>
+            <option value="contract" {{ request('job_type') == 'contract' ? 'selected' : '' }}>Contract</option>
+            <option value="internship" {{ request('job_type') == 'internship' ? 'selected' : '' }}>Internship</option>
+        </select>
+    </div>
+
+    <!-- Remote Jobs Checkbox -->
+    <div class="hidden sm:flex items-center px-3">
+        <label class="flex items-center space-x-2">
+            <input type="checkbox" name="remote" value="1" {{ request('remote') ? 'checked' : '' }} />
+            <span class="text-sm">Remote Only</span>
+        </label>
     </div>
 
     <!-- Search Button -->

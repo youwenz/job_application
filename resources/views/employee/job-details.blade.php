@@ -1,18 +1,24 @@
-@extends('layouts.app')
-
-@section('content')
+<x-employee-layout>
 <div class="container">
-    <h2>{{ $jobListing->title }}</h2>
-    <p><strong>Company:</strong> {{ $jobListing->user->company->name }}</p> <!-- Assuming relationship -->
-    <p><strong>Location:</strong> {{ $jobListing->user->company->address }}</p>
-    <p><strong>Description:</strong> {{ $jobListing->description }}</p>
-
-    <a href="{{ route('jobListings.apply.form', $jobListing->id) }}" class="btn btn-success">Apply Now</a>
-
-    <!-- Bookmark Button -->
-    <form action="{{ route('jobListings.bookmark', $jobListing->id) }}" method="POST" class="d-inline">
-        @csrf
-        <button type="submit" class="btn btn-warning">Bookmark</button>
-    </form>
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ $jobListing->title }}</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Job Type:</strong> {{ $jobListing->job_type }}</p>
+            <p><strong>Salary:</strong> ${{ number_format($jobListing->salary, 2) }}</p>
+            <p><strong>Remote:</strong> {{ $jobListing->remote ? 'Yes' : 'No' }}</p>
+            <p><strong>Description:</strong></p>
+            <p>{{ $jobListing->description }}</p>
+            
+            <p><strong>Requirements:</strong></p>
+            <p>{{ $jobListing->requirements }}</p>
+            
+            <p><strong>Benefits:</strong></p>
+            <p>{{ $jobListing->benefits }}</p>
+            
+            <p><strong>Posted On:</strong> {{ $jobListing->created_at->format('F d, Y') }}</p>
+        </div>
+    </div>
 </div>
-@endsection
+</x-employee-layout>
