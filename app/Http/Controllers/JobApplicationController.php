@@ -7,6 +7,16 @@ use App\Models\JobApplication;
 
 class JobApplicationController extends Controller
 {
+
+    public function index() 
+    {
+        $jobApplications = JobApplication::with('job.user.company')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('jobApplication.index', compact('jobApplications'));
+    }
+
     public function showApplicationForm($jobId)
     {
         $jobListing = JobListing::with('user.company')->findOrFail($jobId);
@@ -46,7 +56,7 @@ class JobApplicationController extends Controller
             'message' => $request->message,
         ]);
 
-        return redirect()->route('jobListings.index')
+        return redirect()->route('jobApplication.index')
             ->with('success', 'Your application has been submitted successfully!');
     }
 }

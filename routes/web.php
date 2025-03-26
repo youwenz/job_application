@@ -43,6 +43,7 @@ Route::get('/jobs', [JobListingController::class, 'index'])->name('jobListings.i
 Route::get('/jobs/{jobId}', [JobListingController::class, 'show'])->name('jobListings.details');
 
 // Job Applications
+Route::get('/applications', [JobApplicationController::class, 'index'])->name('jobApplication.index');
 Route::get('/jobs/{jobId}/apply-job', [JobApplicationController::class, 'showApplicationForm'])->name('jobListings.apply.form');
 Route::post('/jobs/{jobId}/apply-job', [JobApplicationController::class, 'submitApplication'])->name('jobApplication.apply');
 
