@@ -3,7 +3,7 @@
    $isBookmarked = $jobListing->bookmarkedByUsers->contains($dummyUserId);
 @endphp
 <x-employee-layout>
-    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 m-5">
         {{-- Job Title & Company --}}
         <div class="flex items-center justify-between">
             <div>
