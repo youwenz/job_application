@@ -49,8 +49,7 @@ Route::post('/jobs/{jobId}/apply-job', [JobApplicationController::class, 'submit
 
 // Bookmarks
 Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
-Route::post('/employee/jobs/{jobId}/bookmark', [BookmarkController::class, 'save'])->name('jobListings.bookmark');
-Route::delete('/employee/jobs/{jobId}/bookmark', [BookmarkController::class, 'remove'])->name('jobListings.bookmark.remove');
-
+Route::post('/jobs/{jobId}/bookmark', [BookmarkController::class, 'save'])->name('jobListings.bookmark');
+Route::delete('/jobs/{jobId}/bookmark', [BookmarkController::class, 'remove'])->name('jobListings.bookmark.remove');
 
 
