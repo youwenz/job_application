@@ -43,9 +43,9 @@ class JobListing extends Model
     }
 
     // Relation to applicants
-    public function applications(): HasMany
+    public function jobApplications(): HasMany
     {
-        return $this->hasMany(Application::class);
+        return $this->hasMany(JobApplication::class);
     }
 
     public function tags()

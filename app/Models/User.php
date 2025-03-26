@@ -60,9 +60,9 @@ class User extends Authenticatable
     }
 
     // a user (employee only) has many applications
-    public function applications(): HasMany
+    public function jobApplications(): HasMany
     {
-        return $this->hasMany(Application::class, 'user_id');
+        return $this->hasMany(JobApplication::class, 'user_id');
     }
 
     // a user (employer only) has a company

@@ -62,4 +62,5 @@ class JobListingController extends Controller
 
         return view('employee.job-details', compact('jobListing')); 
     }
+
 }

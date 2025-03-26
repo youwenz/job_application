@@ -1,47 +1,40 @@
-@extends('layouts.app')
+<x-employee-layout>
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 m-5">
+        <h1 class="text-2xl font-bold text-gray-800">Apply for {{ $jobListing->title }}</h1>
+        <p class="text-gray-600 mb-4">{{ $jobListing->user->company->name }}</p>
 
-@section('content')
-<div class="container">
-    <h2>Apply for {{ $jobListing->title }}</h2>
+        <form action="{{ route('jobApplication.apply', ['jobId' => $jobListing->id]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            
+            <!-- Name -->
+            <div class="mb-4">
+                <label for="full_name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" name="full_name" id="full_name" class="mt-1 p-2 w-full border border-gray-300 rounded-lg" required>
+            </div>
 
-    <!-- Success Message -->
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+            <!-- Email -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email" class="mt-1 p-2 w-full border border-gray-300 rounded-lg" required>
+            </div>
 
-    <!-- Error Messages -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            <!-- Resume Upload -->
+            <div class="mb-4">
+                <label for="resume" class="block text-sm font-medium text-gray-700">Upload Resume (PDF only)</label>
+                <input type="file" name="resume_path" id="resume_path" accept=".pdf" class="mt-1 p-2 w-full border border-gray-300 rounded-lg" required>
+            </div>
 
-    <!-- Job Application Form -->
-    <form action="{{ route('jobListings.apply', $jobListing->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        
-        <div class="mb-3">
-            <label for="full_name" class="form-label">Full Name</label>
-            <input type="text" name="full_name" id="full_name" class="form-control" required>
-        </div>
+            <!-- Cover Letter -->
+            <div class="mb-4">
+                <label for="cover_letter" class="block text-sm font-medium text-gray-700">Cover Letter</label>
+                <textarea name="message" id="message" rows="4" class="mt-1 p-2 w-full border border-gray-300 rounded-lg"></textarea>
+            </div>
 
-        <div class="mb-3">
-            <label for="message" class="form-label">Cover Letter (Optional)</label>
-            <textarea name="message" id="message" class="form-control"></textarea>
-        </div>
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">Submit Application</button>
+            </div>
+        </form>
+    </div>
+</x-employee-layout>
 
-        <div class="mb-3">
-            <label for="resume" class="form-label">Upload Resume (PDF/DOC)</label>
-            <input type="file" name="resume" id="resume" class="form-control" accept=".pdf,.doc,.docx" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit Application</button>
-    </form>
-</div>
-@endsection

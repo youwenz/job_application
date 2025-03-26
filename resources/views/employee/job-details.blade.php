@@ -13,7 +13,7 @@
                 </a>
             </div>
             <div class="flex flex-row gap-4">
-                <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">Apply Now</a>
+                <a href="{{ route('jobListings.apply.form', ['jobId' => $jobListing->id]) }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">Apply Now</a>
                 <form class="px-2 py-1 border-2 border-gray-200 rounded-xl" action="{{ route('jobListings.bookmark', $jobListing->id) }}" method="POST" x-data="{ bookmarked: false }" @submit.prevent="bookmarked = !bookmarked">
                     @csrf
                     <button type="submit" class="mt-1 text-gray-500 hover:text-blue-500 transition duration-200 transform hover:scale-110">
