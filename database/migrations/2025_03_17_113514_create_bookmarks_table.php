@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bookmarks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('job_id')->constrained()->onDelete('cascade');
+            $table->foreignId('job_id')->constrained('job_listings')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->dropForeign(['user_id']);
             $table->dropForeign(['job_id']);
         });
-        
+
         Schema::dropIfExists('bookmarks');
     }
 };
