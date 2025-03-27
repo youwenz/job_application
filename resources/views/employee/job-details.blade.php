@@ -9,7 +9,7 @@
             <div>
                 <h1 class="text-2xl font-bold text-gray-800">{{ $jobListing->title }}</h1>
                 <a href="/companies/{{$jobListing->user->company->id}}">
-                    <p class="text-gray-600">{{ $jobListing->user->company->name }}</p>
+                    <p class="text-blue-800 underline">{{ $jobListing->user->company->name }}</p>
                 </a>
             </div>
             <div class="flex flex-row gap-4">

@@ -1,4 +1,4 @@
-<a href="{{ route('jobListings.details', $jobListing->id) }}" class="border rounded-lg shadow-md p-4 bg-white">
+<a href="{{ route('jobListings.details', $jobListing->id) }}" class="border border-gray-200 rounded-lg shadow-md p-4 bg-white">
     <h3 class="text-lg font-semibold mt-2">{{ $jobListing->title }}</h3>
     <div class="flex flex-col md:flex-row justify-between md:items-center mt-2 ">
         <span class="text-sm font-semibold px-2 py-1 rounded bg-green-200 text-green-800 w-fit">

@@ -7,7 +7,7 @@
                 <a href="{{ route('companies.show', $company->id) }}" class="block">
                     <div class="bg-white shadow-md rounded-lg p-6 flex flex-col items-start border border-gray-200 hover:shadow-lg transition duration-300 cursor-pointer">
                         <div class="flex items-center gap-4">
-                            <img src="{{ asset('storage/' . $company->logo) }}" alt="Company Logo"
+                            <img src="{{ $company->logo }}" alt="Company Logo"
                                  class="h-16 w-16 object-cover rounded-lg">
                             <div>
                                 <h3 class="text-lg font-semibold">{{ $company->name }}</h3>
