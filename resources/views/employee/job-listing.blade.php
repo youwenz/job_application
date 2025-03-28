@@ -1,4 +1,11 @@
 <x-employee-layout>
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 text-center w-full" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
     <div class="container mx-auto p-6">
         <h2 class="text-2xl font-bold mb-6">Find Job</h2>
 
@@ -8,9 +15,15 @@
     
         <!-- Job Listings Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($jobListings as $job)
-                <x-job-listing-card :jobListing="$job" />
-            @endforeach
+            @if($jobListings->isEmpty())
+                <div class="text-center py-10">
+                    <p class="text-gray-500 text-lg">No jobs found.</p>
+                </div>
+            @else
+                @foreach($jobListings as $job)
+                    <x-job-listing-card :jobListing="$job" />
+                @endforeach
+            @endif
         </div>
 
         <!-- Pagination -->

@@ -1,8 +1,8 @@
-<x-employer-layout>
+<x-employee-layout>
     <div class="container mx-auto px-6 py-10 flex flex-col items-center">
         <div class="bg-white shadow-lg rounded-xl p-10 border border-gray-200 w-full max-w-2xl text-center">
             <div class="flex flex-col items-center">
-                <img src="{{ asset('storage/' . $company->logo) }}"
+                <img src="{{  $company->logo }}"
                      alt="Company Logo"
                      class="h-24 w-24 object-cover rounded-lg shadow-md mb-4">
 
@@ -18,7 +18,7 @@
                         '💼 Industry' => $company->industry_type ?? 'Not specified',
                         '👥 Company Size' => $company->company_size ?? 'Not specified',
                         '🔗 Website' => $company->website ? "<a href='{$company->website}' class='text-blue-500 underline' target='_blank'>{$company->website}</a>" : 'N/A',
-                        '👤 Owner' => $company->owner_name ?? 'Not specified',
+                        '👤 Owner' => $company->user-> name ?? 'Not specified',
                         '📞 Phone' => $company->phone ?? 'Not specified',
                     ];
                 @endphp
@@ -37,6 +37,6 @@
             </a>
         </div>
     </div>
-</x-employer-layout>
+</x-employee-layout>
 
 
