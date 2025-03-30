@@ -15,10 +15,13 @@ Route::get('/', function () {
 
 // Company Routes (Employer dashboard)
 Route::prefix('companies')->name('companies.')->group(function () {
-    Route::get('/', [CompanyController::class, 'index'])->name('index'); // List companies
+    Route::get('/', [CompanyController::class, 'index'])->name('index'); // Home Page
+    Route::get('/list', [CompanyController::class, 'list'])->name('list'); // List companies
     Route::get('/create', [CompanyController::class, 'create'])->name('create'); // Create form
     Route::post('/', [CompanyController::class, 'store'])->name('store'); // Store company
     Route::get('/{id}', [CompanyController::class, 'viewCompany'])->name('show'); // View company
+    Route::get('/companies/{id}/showEmployer', [CompanyController::class, 'viewCompanyForEmployer'])
+    ->name('companies.showEmployer');
     Route::post('/{id}', [CompanyController::class, 'updateCompany'])->name('update'); // Update company
     Route::get('/delete/{id}', [CompanyController::class, 'deleteCompany'])->name('delete'); // Delete company
 });

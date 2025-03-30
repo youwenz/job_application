@@ -6,13 +6,22 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+
     public function index() {
         return view('companies.index', ['companies' => Company::all()]);
     }
+    public function list() {
+        return view('companies.list', ['companies' => Company::all()]);
+    }
 
-    public function viewCompany($id) {//return company view by id
+    public function viewCompany($id) {//return company view by id for employee view
         $company = Company::findOrFail($id);
         return view('companies.show', compact('company'));
+    }
+
+    public function viewCompanyForEmployer($id) {//return company view by id for employer view
+        $company = Company::findOrFail($id);
+        return view('companies.showEmployer', compact('company'));
     }
 
     public function create() {

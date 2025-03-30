@@ -6,16 +6,27 @@
 
                 <!-- Navigation Links -->
                 <div class="sm:flex space-x-8 h-full ml-24 items-center">
+                    <!-- Home -->
                     <a href="/companies" class="{{ request()->is('employer') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Home
                     </a>
-                    <a href="/companies/jobs" class="{{ request()->is('jobs') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
-                        My Jobs
+                    <!-- Job Listing -->
+                    <a href="{{ route('companies.showEmployer') }}" class="{{ request()->routeIs('companies.showEmployer') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                        Job Listings
                     </a>
-                    <a href="/companies/jobs/create" class="{{ request()->is('jobs/create') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+
+                    <!-- Create Job -->
+                    <a href="{{ route('employer.jobs.create') }}" class="{{ request()->routeIs('employer.jobs.create') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Post a Job
                     </a>
-                    <a href="/companies/create" class="{{ request()->is('employer/applications') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+
+                    <!-- My Company -->
+                    <a href="{{ route('employer.company.show') }}" class="{{ request()->routeIs('employer.company.show') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                        My Company
+                    </a>
+
+                    <!-- Job Applications -->
+                    <a href="{{ route('companies.applications') }}" class="{{ request()->routeIs('employer.applications.*') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Applications
                     </a>
                 </div>
@@ -23,6 +34,4 @@
         </div>
     </div>
 </nav>
-
-
 
