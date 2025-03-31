@@ -1,5 +1,25 @@
+@props(['company', 'showUpdateButton' => false])
+
 <div class="container mx-auto px-6 py-10 flex flex-col items-center">
-    <div class="bg-white shadow-lg rounded-xl p-10 border border-gray-200 w-full max-w-2xl text-center">
+    <div class="bg-white shadow-lg rounded-xl p-10 border border-gray-200 w-full max-w-2xl text-center relative">
+
+        @if ($showUpdateButton)
+            <a href="{{ route('companies.edit', $company->id) }}"
+               class="absolute top-4 right-4 p-2 rounded-full shadow-md transition duration-300
+                      group hover:bg-gray-100 hover:shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="2" stroke="currentColor"
+                     class="h-6 w-6 text-blue-500 group-hover:scale-110 transition-transform">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M16.862 3.487a2.25 2.25 0 013.182 3.182L7.018 19.696a1.5 1.5 0 01-.67.39l-4.5 1.2a.75.75 0 01-.927-.928l1.2-4.5a1.5 1.5 0 01.39-.67L16.862 3.487zM15 5.25l3.75 3.75" />
+                </svg>
+                <span class="absolute -top-8 right-0 bg-black text-white text-xs py-1 px-2 rounded-lg
+                              opacity-0 group-hover:opacity-100 transition-opacity">
+                    Edit
+                </span>
+            </a>
+        @endif
+
         <div class="flex flex-col items-center">
             <img src="{{ asset('storage/' . $company->logo) }}"
                  alt="Company Logo"
@@ -35,12 +55,5 @@
             View Open Positions ({{ $company->job_openings ?? 0 }})
         </a>
 
-        <!-- Conditionally show Update Button -->
-        @if ($showUpdateButton ?? false)
-            <a href="{{ route('companies.edit', $company->id) }}"
-               class="block mt-4 bg-yellow-500 text-white text-center py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 w-4/5 mx-auto">
-                Update Company
-            </a>
-        @endif
     </div>
 </div>
