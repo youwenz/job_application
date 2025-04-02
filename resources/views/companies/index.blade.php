@@ -1,35 +1,49 @@
-<x-employee-layout>
-    <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-4">Top Companies</h2>
+<x-employer-layout>
+    <div class="w-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient-x text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-extrabold mb-6">Create Your Own Company</h1>
+            <p class="text-lg mb-12">Start building your dream company and hire the best talent.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach ($companies as $company)
-                <a href="{{ route('companies.show', $company->id) }}" class="block">
-                    <div class="bg-white shadow-md rounded-lg p-6 flex flex-col items-start border border-gray-200 hover:shadow-lg transition duration-300 cursor-pointer">
-                        <div class="flex items-center gap-4">
-                            <img src="{{ $company->logo }}" alt="Company Logo"
-                                 class="h-16 w-16 object-cover rounded-lg">
-                            <div>
-                                <h3 class="text-lg font-semibold">{{ $company->name }}</h3>
-                                <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded">Featured</span>
-                            </div>
-                        </div>
-
-                        <p class="text-gray-500 mt-2 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                 stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            {{ $company->city ?? 'Not specified' }}
-                        </p>
-                        <p class="w-full bg-blue-100 text-blue-700 font-semibold mt-4 py-2 text-center rounded">
-                            Open Position ({{ $company->job_openings ?? 0 }})
-                        </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16 max-w-4xl mx-auto">
+                <!-- Create Company Card -->
+                <div class="bg-white shadow-lg rounded-2xl flex flex-col items-center p-8 space-y-4 transition hover:shadow-xl">
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <x-heroicon-o-building-office class="w-10 h-10 text-blue-500" />
                     </div>
-                </a>
-            @endforeach
+                    <h2 class="text-2xl font-bold text-gray-800">Start Your Company</h2>
+                    <p class="text-gray-600 text-center">Create and manage your own company.</p>
+                    <a href="{{ route('companies.create') }}"
+                       class="bg-blue-500 text-white text-sm font-bold py-3 px-6 rounded-lg transition hover:bg-blue-700">
+                        Create Company
+                    </a>
+                </div>
+
+                <!-- Create Job Card -->
+                <div class="bg-white shadow-lg rounded-2xl flex flex-col items-center p-8 space-y-4 transition hover:shadow-xl">
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <x-heroicon-s-briefcase class="w-10 h-10 text-blue-500" />
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Post a Job</h2>
+                    <p class="text-gray-600 text-center">Hire top talents for your company.</p>
+                    <a href="{{ route('jobs.create') }}"
+                       class="bg-blue-500 text-white text-sm font-bold py-3 px-6 rounded-lg transition hover:bg-blue-700">
+                        Create Job
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</x-employee-layout>
 
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animate-gradient-x {
+            background-size: 200% 200%;
+            animation: gradient 4s ease infinite;
+        }
+    </style>
+</x-employer-layout>
