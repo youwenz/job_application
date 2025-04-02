@@ -8,7 +8,7 @@ use App\Models\JobApplication;
 class JobApplicationController extends Controller
 {
 
-    public function index() 
+    public function index()
     {
         $jobApplications = JobApplication::with('job.user.company')
             ->orderBy('created_at', 'desc')
@@ -29,7 +29,7 @@ class JobApplicationController extends Controller
 
         if (!$jobListing) {
             return back()->withErrors(['job_id' => 'The selected job does not exist.']);
-        }        
+        }
 
         $request->validate([
             'full_name' => 'required|string|max:255',
@@ -49,7 +49,7 @@ class JobApplicationController extends Controller
         // Save Application
         JobApplication::create([
             'job_id' => $jobListing->id,
-            'user_id' => $dummyUserId, 
+            'user_id' => $dummyUserId,
             'full_name' => $request->full_name,
             'email' => $request->email,
             'resume_path' => $resumePath,
@@ -59,4 +59,19 @@ class JobApplicationController extends Controller
         return redirect()->route('jobApplication.index')
             ->with('success', 'Your application has been submitted successfully!');
     }
+
+    public function showApplicants($jobId)
+    {
+        // Get the job listing by jobId
+        $jobListing = JobListing::findOrFail($jobId);
+
+        // Fetch paginated job applications for this specific job listing
+        $jobApplications = JobApplication::where('job_id', $jobId)->paginate(5);  // Paginate with 5 per page
+
+        // Return the view and pass the data
+        return view('jobApplication.showApplicants', compact('jobListing', 'jobApplications'));
+    }
+
+
+
 }

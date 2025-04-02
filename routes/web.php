@@ -24,15 +24,21 @@ Route::prefix('companies')->name('companies.')->group(function () {
     Route::put('/{id}', [CompanyController::class, 'update'])->name('update');// Update company
 });
 
-// Job Routes (Employer dashboard)
-Route::prefix('companies/jobs')->name('jobs.')->group(function () {
-    Route::get('/', [JobController::class, 'index'])->name('index');
-    Route::get('/create', [JobController::class, 'create'])->name('create');
-    Route::post('/create', [JobController::class, 'store'])->name('store');
-    Route::get('/{id}', [JobController::class, 'view'])->name('show');
-    Route::put('/{id}', [JobController::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [JobController::class, 'delete'])->name('delete');
-});
+// Route::middleware(['auth'])->group(function () {
+    Route::prefix('companies/jobs')->name('jobs.')->group(function () {
+        Route::get('/create', [JobController::class, 'create'])->name('create');
+        Route::post('/create', [JobController::class, 'store'])->name('store');
+        Route::get('/{userId}', [JobController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit'); // Show edit form
+        Route::put('/{id}', [JobController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [JobController::class, 'delete'])->name('delete');
+
+        // Show applicants for a specific job
+        Route::get('/{jobId}/application', [JobApplicationController::class, 'showApplicants'])->name('showApplicants');
+
+    });
+// });
+
 
 Route::get('/jobs/search', [SearchController::class, 'index'])->name('search.index');
 

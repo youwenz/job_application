@@ -49,22 +49,6 @@
                     <p class="text-sm text-gray-500">Describe Job Descriptions in Detail, including Requirements, Skills, or Education*</p>
                     <textarea name="description" class="w-full mt-2 border p-3 rounded-lg h-32" placeholder="Job Description" required></textarea>
 
-                    <div class="mt-6 space-y-3">
-                        <p class="font-semibold">Additional Options</p>
-                        <div class="flex items-center justify-between">
-                            <span>See Video Interviews</span>
-                            <input type="checkbox" name="benefits[]" value="Video Interviews" class="toggle toggle-primary">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span>Video Calling</span>
-                            <input type="checkbox" name="benefits[]" value="Video Calling" class="toggle toggle-primary">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span>Email</span>
-                            <input type="checkbox" name="benefits[]" value="Email" class="toggle toggle-primary">
-                        </div>
-                    </div>
-
                     <button type="submit" class="mt-6 bg-blue-600 text-white py-3 px-6 w-full rounded-lg">Post Job</button>
                 </div>
             </div>
