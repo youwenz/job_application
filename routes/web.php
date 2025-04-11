@@ -5,12 +5,33 @@ use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Auth\LogoutController; 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\PasswordController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Landing page for pre-login
 Route::get('/', function () {
-    return view('dashboard.index');
-});
+    if (!Auth::check()) {
+        return view('dashboard.index');
+    }
+
+    $user = Auth::user();
+
+    if ($user->role === 'employer') {
+        return redirect()->route('companies.index');
+    } elseif ($user->role === 'employee') {
+        return view('dashboard.index'); 
+    }
+
+    return view('dashboard.index'); 
+})->name('dashboard');
+
 
 // Company Routes (Employer dashboard)
 Route::prefix('companies')->name('companies.')->group(function () {
@@ -58,5 +79,54 @@ Route::post('/jobs/{jobId}/apply-job', [JobApplicationController::class, 'submit
 Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
 Route::post('/jobs/{jobId}/bookmark', [BookmarkController::class, 'save'])->name('jobListings.bookmark');
 Route::delete('/jobs/{jobId}/bookmark', [BookmarkController::class, 'remove'])->name('jobListings.bookmark.remove');
+
+// Authentication
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
+// Email Verification Route
+Route::get('/email/verify/{id}/{hash}', VerifyEmailController::class)
+    ->middleware(['auth', 'signed', 'throttle:6,1'])
+    ->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+// Profile routes
+Route::middleware('auth')->group(function () {
+    // Show the profile edit form
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    // Update the profile information
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Delete the user's account
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::put('/user/password', [PasswordController::class, 'update'])->name('password.update');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+// require __DIR__.'/auth.php';
 
 

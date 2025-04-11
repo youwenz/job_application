@@ -6,7 +6,7 @@
         </div>
 
         <!-- Middle Section: Search Bar -->
-        <form method="GET" action="{{route('search.index')}}"
+        <form method="GET" action="{{ route('search.index') }}"
               class="flex items-center border border-gray-300 rounded-full px-4 py-2 space-x-2 w-1/2">
             <span class="text-secondary">🇲🇾</span>
             <span class="text-tertiary">Selangor</span>
@@ -26,11 +26,18 @@
             </button>
         </form>
 
-
         <!-- Right Section: Buttons -->
         <div class="flex space-x-4">
-            <button class="border border-blue-200 text-secondary px-5 py-2 rounded">Sign In</button>
-            <button class="bg-secondary text-white px-5 py-2 rounded">Log In</button>
+            @if (Auth::check()) <!-- Check if user is logged in -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('profile.edit') }}" class="border border-blue-200 text-secondary px-5 py-2 rounded">Profile</a>
+                    <button type="submit" class="border border-blue-200 text-secondary px-5 py-2 rounded">Log Out</button>
+                </form>
+            @else <!-- If the user is not logged in -->
+                <a href="{{ route('register') }}" class="border border-blue-200 text-secondary px-5 py-2 rounded">Sign Up</a>
+                <a href="{{ route('login') }}" class="bg-secondary text-white px-5 py-2 rounded">Log In</a>
+            @endif
         </div>
     </div>
 </div>
