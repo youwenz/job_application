@@ -22,8 +22,9 @@
             </svg>
             <input type="text" placeholder="Job title, keyword, company" name="keyword"
                    class="w-full outline-none text-gray-700"/>
-            <button type="submit" class="bg-secondary text-white px-5 py-2 rounded-3xl whitespace-nowrap">Search
-            </button>
+                   <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-3xl whitespace-nowrap">
+                    Search
+                </button>
         </form>
 
         <!-- Right Section: Buttons -->
@@ -36,7 +37,7 @@
                 </form>
             @else <!-- If the user is not logged in -->
                 <a href="{{ route('register') }}" class="border border-blue-200 text-secondary px-5 py-2 rounded">Sign Up</a>
-                <a href="{{ route('login') }}" class="bg-secondary text-white px-5 py-2 rounded">Log In</a>
+                <a href="{{ route('login') }}" class="bg-blue-600 text-white px-5 py-2 rounded">Log In</a>
             @endif
         </div>
     </div>

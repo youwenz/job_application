@@ -9,11 +9,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-24">
                 <!-- Live Jobs Card -->
                 <div class="bg-white shadow rounded-2xl flex items-center p-6 space-x-4">
-                    <div class="bg-blue-50 p-4 rounded-xl">
-                        <x-heroicon-o-briefcase class="w-6 h-6 text-secondary"/>
+                    <div class="bg-blue-500 p-4 rounded-xl">
+                        <x-heroicon-o-briefcase class="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-tertiary">1,75,324</h2>
+                        <h2 class="text-xl font-bold text-gray-700">1,75,324</h2>
                         <p class="text-gray-500">Live Job</p>
                     </div>
                 </div>
@@ -24,29 +24,29 @@
                         <x-heroicon-s-building-office class="w-6 h-6 text-primary"/>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-tertiary">97,354</h2>
+                    <h2 class="text-xl font-bold text-gray-700">97,354</h2>
                         <p class="text-gray-500">Companies</p>
                     </div>
                 </div>
 
                 <!-- Candidates Card -->
                 <div class="bg-white shadow rounded-2xl flex items-center p-6 space-x-4">
-                    <div class="bg-blue-50 p-4 rounded-xl">
-                        <x-heroicon-s-users class="w-6 h-6 text-secondary"/>
+                    <div class="bg-blue-500 p-4 rounded-xl">
+                        <x-heroicon-s-users class="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-tertiary">38,47,154</h2>
+                        <h2 class="text-xl font-bold text-gray-700">38,47,154</h2>
                         <p class="text-gray-500">Candidates</p>
                     </div>
                 </div>
 
                 <!-- New Jobs Card -->
                 <div class="bg-white shadow rounded-2xl flex items-center p-6 space-x-4">
-                    <div class="bg-blue-50 p-4 rounded-xl">
-                        <x-heroicon-s-newspaper class="w-6 h-6 text-secondary"/>
+                    <div class="bg-blue-500 p-4 rounded-xl">
+                        <x-heroicon-s-newspaper class="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-tertiary">7,532</h2>
+                        <h2 class="text-xl font-bold text-gray-700">7,532</h2>
                         <p class="text-gray-500">New Jobs</p>
                     </div>
                 </div>
