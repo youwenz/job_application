@@ -1,3 +1,5 @@
+@props(['pageTitle' => null])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -15,16 +17,30 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+    <div class="min-h-screen flex">
+        <!-- Form -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-center bg-gray-100 px-6">
+            <!-- Logo / Brand Name -->
+            <div class="text-center mb-6">
+                <a href="/" class="text-4xl font-extrabold text-indigo-600 hover:text-indigo-800 transition duration-200">
+                    TalentHub
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <!-- Form Card -->
+            <div class="w-full max-w-md bg-white shadow-md rounded-lg p-6">
+                @if (isset($pageTitle))
+                    <h2 class="text-xl font-semibold text-center text-gray-700 mb-6">{{ $pageTitle }}</h2>
+                 @endif
                 {{ $slot }}
             </div>
         </div>
-    </body>
+
+        <!-- Image -->
+        <div class="hidden md:block w-1/2">
+            <img src="{{ asset('images/login_image.jpg') }}" alt="Right Side" class="object-cover w-full h-full">
+        </div>
+    </div>
+</body>
+
 </html>

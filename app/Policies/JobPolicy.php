@@ -13,7 +13,8 @@ class JobPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        // Allow any authenticated user to view job listings
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class JobPolicy
      */
     public function view(User $user, JobListing $job): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class JobPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +54,7 @@ class JobPolicy
      */
     public function restore(User $user, JobListing $job): bool
     {
-        //
+        return $user->id === $job->user_id;
     }
 
     /**
@@ -61,6 +62,6 @@ class JobPolicy
      */
     public function forceDelete(User $user, JobListing $job): bool
     {
-        //
+        return $user->id === $job->user_id;
     }
 }

@@ -1473,6 +1473,7 @@
 <header class="w-full not-has-[nav]:hidden">
     <x-employer-header/>
 </header>
+<x-filter-bar/>
 {{$slot}}
 </body>
 <footer>

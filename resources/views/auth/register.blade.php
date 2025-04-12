@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :pageTitle="'Start Your Journey with TalentHub'">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
