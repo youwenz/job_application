@@ -1,6 +1,6 @@
 @props(['company', 'showUpdateButton' => false])
 
-<div class="container mx-auto px-6 py-10 flex flex-col items-center">
+<div class="w-full px-6 py-10 flex flex-col items-center bg-blue-100">
     <div class="bg-white shadow-lg rounded-xl p-10 border border-gray-200 w-full max-w-2xl text-center relative">
 
         @if ($showUpdateButton)

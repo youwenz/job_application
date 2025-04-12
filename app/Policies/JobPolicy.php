@@ -30,7 +30,7 @@ class JobPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->role === 'employer';
     }
 
     /**
@@ -38,7 +38,7 @@ class JobPolicy
      */
     public function update(User $user, JobListing $job): bool
     {
-        return $user->id == $job->user_id;
+        return $user->id === $job->user_id;
     }
 
     /**
@@ -46,7 +46,7 @@ class JobPolicy
      */
     public function delete(User $user, JobListing $job): bool
     {
-        return $user->id == $job->user_id;
+        return $user->id === $job->user_id;
     }
 
     /**

@@ -104,9 +104,14 @@
                         </select>
                     </div>
 
+                    @foreach ($errors->all() as $error)
+                        <p class="text-red-500 text-sm">{{ $error }}</p>
+                    @endforeach
+
                     <button type="submit" class="mt-5 bg-blue-600 text-white py-3 px-6 w-full rounded-lg" onclick="this.disabled=true; this.form.submit();">
                         Create Company
                     </button>
+
                 </div>
             </div>
         </div>

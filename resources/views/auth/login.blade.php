@@ -1,4 +1,5 @@
 <x-guest-layout :pageTitle="'Welcome Back'">
+    <p class="text-center mb-4">New to TalentHub? <a href="{{route('register')}}" class="text-blue-600">Sign up for an account</a></p>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

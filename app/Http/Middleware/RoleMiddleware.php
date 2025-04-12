@@ -13,13 +13,13 @@ class RoleMiddleware
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */ 
+     */
     public function handle(Request $request, Closure $next, $role)
     {
         // Check if the user is authenticated and has the required role
         if (Auth::check() && Auth::user()->role !== $role) {
             // Redirect if the user does not have the correct role
-            return redirect('/');  
+            return redirect('/');
         }
 
         return $next($request);

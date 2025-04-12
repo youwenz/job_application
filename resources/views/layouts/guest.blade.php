@@ -30,7 +30,7 @@
             <!-- Form Card -->
             <div class="w-full max-w-md bg-white shadow-md rounded-lg p-6">
                 @if (isset($pageTitle))
-                    <h2 class="text-xl font-semibold text-center text-gray-700 mb-6">{{ $pageTitle }}</h2>
+                    <h2 class="text-xl font-semibold text-center text-gray-700 mb-2">{{ $pageTitle }}</h2>
                  @endif
                 {{ $slot }}
             </div>

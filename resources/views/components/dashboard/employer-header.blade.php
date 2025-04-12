@@ -11,17 +11,17 @@
                         Home
                     </a>
                     <!-- Job Listing -->
-                    <a href="#" class="{{ request()->routeIs('companies.showEmployer') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
-                        Job Listings
+                    <a href="{{route('jobs.show', auth()->id())}}" class="{{ request()->routeIs('companies.showEmployer') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                        My Jobs
                     </a>
 
                     <!-- Create Job -->
-                    <a href="#" class="{{ request()->routeIs('employer.jobs.create') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="{{route('jobs.create')}}" class="{{ request()->routeIs('employer.jobs.create') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Post a Job
                     </a>
 
                     <!-- My Company -->
-                    <a href="#" class="{{ request()->routeIs('employer.company.show') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="{{route('companies.view', auth()->user()->company->id)}}" class="{{ request()->routeIs('employer.company.show') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         My Company
                     </a>
 
