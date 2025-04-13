@@ -71,7 +71,4 @@ class JobApplicationController extends Controller
         // Return the view and pass the data
         return view('jobApplication.showApplicants', compact('jobListing', 'jobApplications'));
     }
-
-
-
 }

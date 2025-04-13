@@ -50,10 +50,5 @@
             @endforeach
         </div>
 
-        <a href="{{ route('companies.show', $company->id) }}"
-           class="block mt-6 bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 w-4/5 mx-auto">
-            View Open Positions ({{ $company->job_openings ?? 0 }})
-        </a>
-
     </div>
 </div>

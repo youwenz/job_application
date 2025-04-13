@@ -38,14 +38,13 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
     Route::prefix('companies/jobs')->name('jobs.')->group(function () {
         Route::get('/create', [JobController::class, 'create'])->name('create');
         Route::post('/create', [JobController::class, 'store'])->name('store');
-        Route::get('/{userId}', [JobController::class, 'show'])->name('show');
+        Route::get('/show', [JobController::class, 'show'])->name('show');
         Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit'); // Show edit form
         Route::put('/{id}', [JobController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [JobController::class, 'delete'])->name('delete');
 
         // Show applicants for a specific job
         Route::get('/{jobId}/application', [JobApplicationController::class, 'showApplicants'])->name('showApplicants');
-
     });
 
     // Company Routes (Employer dashboard)
@@ -53,7 +52,7 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
         Route::get('/', [CompanyController::class, 'index'])->name('index'); // Home Page
         Route::get('/create', [CompanyController::class, 'create'])->name('create'); // Create form
         Route::post('/', [CompanyController::class, 'store'])->name('store'); // Store company
-        Route::get('/showEmployer/{id}', [CompanyController::class, 'viewCompanyEmployer'])->name('showEmployer');
+        Route::get('/showEmployer', [CompanyController::class, 'viewCompanyEmployer'])->name('showEmployer');
         Route::get('/view/{id}', [CompanyController::class, 'viewCompany'])->name('view');
         Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('edit'); // Edit company form
         Route::put('/{id}', [CompanyController::class, 'update'])->name('update');// Update company
