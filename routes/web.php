@@ -8,7 +8,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\LogoutController; 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -27,10 +27,10 @@ Route::get('/', function () {
     if ($user->role === 'employer') {
         return redirect()->route('companies.index');
     } elseif ($user->role === 'employee') {
-        return view('dashboard.index'); 
+        return view('dashboard.index');
     }
 
-    return view('dashboard.index'); 
+    return view('dashboard.index');
 })->name('dashboard');
 
 // Employer-only routes
@@ -54,6 +54,7 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('create'); // Create form
         Route::post('/', [CompanyController::class, 'store'])->name('store'); // Store company
         Route::get('/showEmployer/{id}', [CompanyController::class, 'viewCompanyEmployer'])->name('showEmployer');
+        Route::get('/view/{id}', [CompanyController::class, 'viewCompany'])->name('view');
         Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('edit'); // Edit company form
         Route::put('/{id}', [CompanyController::class, 'update'])->name('update');// Update company
     });

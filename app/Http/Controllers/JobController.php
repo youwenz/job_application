@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\JobListing;
 use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
+    use AuthorizesRequests;
+
     public function __construct()
     {
         // Apply auth middleware later when authentication is implemented
@@ -54,31 +57,44 @@ class JobController extends Controller
         return view('jobs.show', compact('jobs'));
     }
 
-        // Show edit form
-        public function edit($id)
-        {
-            $job = JobListing::where('id', $id)->where('user_id', 1)->firstOrFail(); // Replace with auth()->id()
-            return view('jobs.edit', compact('job'));
-        }
+    // Show edit form
+    public function edit($id)
+    {
 
-        // Update job listing
-        public function update(Request $request, $id)
-        {
-            // Find the job by ID
-            $job = JobListing::findOrFail($id);
+        $job = JobListing::where('id', $id)->where('user_id', 1)->firstOrFail(); // Replace with auth()->id()
 
-            // Update the job details
-            $job->update($request->all());
+        // Policy to ensure that only user that created the job can update it
+//        $this->authorize('update', $job);
 
-            // Redirect to the show route based on userId
-            return redirect()->route('jobs.show', ['userId' => $job->user_id]);
-        }
+        return view('jobs.edit', compact('job'));
+    }
 
-        // Delete job listing
-        public function delete($id)
-        {
-            $job = JobListing::where('id', $id)->where('user_id', 1)->firstOrFail(); // Replace with auth()->id()
-            $job->delete();
-            return redirect()->route('jobs.show', ['userId' => $job->user_id])->with('success', 'Job deleted successfully!');
-        }
+    // Update job listing
+    public function update(Request $request, $id)
+    {
+        // Find the job by ID
+        $job = JobListing::findOrFail($id);
+
+        // Policy to ensure that only user that created the job can update it
+//        $this->authorize('update', $job);
+
+        // Update the job details
+        $job->update($request->all());
+
+        // Redirect to the show route based on userId
+        return redirect()->route('jobs.show', ['userId' => $job->user_id]);
+    }
+
+    // Delete job listing
+    public function delete($id)
+    {
+        $job = JobListing::find($id); // Replace with auth()->id()
+
+        // Policy to ensure that only user that created the job can delete it
+//        $this->authorize('delete', JobListing::class);
+
+        $job->delete();
+
+        return redirect()->route('jobs.show', ['userId' => $job->user_id])->with('success', 'Job deleted successfully!');
+    }
 }

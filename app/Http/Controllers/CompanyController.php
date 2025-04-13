@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Company;
 
 class CompanyController extends Controller
 {
+    use AuthorizesRequests;
+
     // Employer HomePage
     public function index() {
         return view('companies.index');
@@ -20,11 +22,17 @@ class CompanyController extends Controller
 
     // Display the form to create a company
     public function create() {
+        $this->authorize('create', Company::class);
+        if(auth()->user()->company) {
+            return redirect(route('companies.view', auth()->user()->company->id));
+        }
         return view('companies.create');
     }
 
     // Store a new company
     public function store(Request $request) {
+        $this->authorize('create', Company::class);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'owner_name' => 'required|string|max:255',
@@ -42,6 +50,7 @@ class CompanyController extends Controller
         ]);
 
         $companyData = $request->except('logo');
+        $companyData['user_id'] = auth()->id();
 
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('logos', 'public');
