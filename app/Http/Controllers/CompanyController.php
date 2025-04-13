@@ -63,14 +63,17 @@ class CompanyController extends Controller
     }
 
     // Show company details for employees
-    public function viewCompany($id) {
-        $company = Company::findOrFail($id);
+    public function viewCompany()
+    {
+        $company = Company::where('user_id', auth()->id())->firstOrFail(); // Get the user's company
         return view('companies.show', compact('company'));
     }
 
+
     // Show company details for employers
-    public function viewCompanyEmployer($id) {
-        $company = Company::findOrFail($id);
+    public function viewCompanyEmployer()
+    {
+        $company = Company::where('user_id', auth()->id())->firstOrFail(); // Get the user's company
         return view('companies.showEmployer', compact('company'));
     }
 

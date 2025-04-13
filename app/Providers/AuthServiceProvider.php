@@ -34,5 +34,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('edit-job', function (User $user, JobListing $job) {
             return $user->id === $job -> user_id;
         });
+        // Gate::define('update', function (User $user, JobListing $job) {
+        //     return $user->id === $job->user_id;
+        // });
+
+        // Gate::define('delete', function (User $user, JobListing $job) {
+        //     return $user->id === $job->user_id;
+        // });
     }
 }
