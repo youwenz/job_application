@@ -67,28 +67,15 @@ class JobController extends Controller
 
         return view('jobs.show', compact('jobs'));
     }
-    // public function show()
-    // {
-    //     // Get the current user's jobs
-    //     $jobs = JobListing::where('user_id', auth()->id())->paginate(10);
-
-    //     // Test the gate manually by checking if the user can update any job
-    //     $job = $jobs->first(); // Check the first job
-    //     if ($job && !Gate::allows('update', $job)) {
-    //         // If the user cannot update the job, throw a 403 error
-    //         abort(403, 'You are not authorized to update this job');
-    //     }
-
-    //     // Return the jobs if the policy allows
-    //     return view('jobs.show', compact('jobs'));
-    // }
-
 
     // Show edit form
     public function edit($id)
     {
         // Replace hardcoded user_id with auth()->id()
-        $job = JobListing::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $job = JobListing::find($id);
+
+        // Show the edit form only when the job is created by the currently logged in user
+        $this->authorize('update', $job);
 
         return view('jobs.edit', compact('job'));
     }
@@ -97,7 +84,10 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         // Find the job by ID and ensure it belongs to the authenticated user
-        $job = JobListing::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $job = JobListing::find($id);
+
+        // Allows editing when the job is created by the currently logged in user
+        $this->authorize('update', $job);
 
         // Update the job details
         $job->update($request->all());
@@ -109,7 +99,10 @@ class JobController extends Controller
     public function delete($id)
     {
         // Ensure that the job belongs to the authenticated user
-        $job = JobListing::where('user_id', auth()->id())->findOrFail($id);
+        $job = JobListing::find($id);
+
+        // Allows deletion when the job is created by the currently logged in user
+        $this->authorize('delete', $job);
 
         // Delete the job
         $job->delete();
