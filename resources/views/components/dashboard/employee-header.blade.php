@@ -12,7 +12,7 @@
                     <a href="/jobs" class="{{ request()->is('jobs*') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                         Browse Jobs
                     </a>
-                    <a href="{{ route('companies.list') }}" class="{{ request()->routeIs('companies.list') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
+                    <a href="{{ route('companies.list') }}" class="{{ request()->is('companies*') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">
                     Browse Companies
                     </a>
                     <a href="/bookmarks" class="{{ request()->is('bookmarks') ? 'border-b-2 border-secondary text-tertiary' : 'text-tertiary' }} transition flex items-center h-full">

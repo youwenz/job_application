@@ -60,10 +60,9 @@ class JobController extends Controller
     }
 
     // Show all jobs created by a specific user
-    public function show()
+    public function show($userId)
     {
-        // Use auth()->id() to get the current user's jobs
-        $jobs = JobListing::where('user_id', auth()->id())->paginate(10);
+        $jobs = JobListing::where('user_id', $userId)->paginate(10);
 
         return view('jobs.show', compact('jobs'));
     }
