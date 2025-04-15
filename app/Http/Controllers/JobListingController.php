@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\JobListing;
+use Illuminate\Support\Facades\Gate;
 
 class JobListingController extends Controller
 {
@@ -51,6 +52,10 @@ class JobListingController extends Controller
 
     public function show($jobId)
     {
+        if (!Gate::allows('view-job')) {
+            abort(403, 'Please login to view job listings.');
+        }
+
         $jobListing = JobListing::find($jobId);
 
         if (!$jobListing) {

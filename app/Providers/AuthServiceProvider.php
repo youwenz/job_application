@@ -26,5 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+<<<<<<< Updated upstream
+=======
+
+        Gate::define('view-job', function (User $user) {
+            return $user->role === 'employee'; 
+        });
+        // Gate::define('isEmployee', fn (Authenticatable $user) => true);
+        // Gate::define('isEmployer', fn (Authenticatable $user) => true);
+>>>>>>> Stashed changes
     }
 }
