@@ -2,9 +2,14 @@
     <div
         class="w-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient-x text-white">
         <div class="container mx-auto px-4 py-20 text-center">
-            <h1 class="text-5xl font-extrabold mb-6">Find Your Dream Job</h1>
+            <h1 class="text-5xl font-extrabold mb-6">
+                @if(session('username'))
+                    Hello {{ session('username') }}, Find Your Dream Job
+                @else
+                    Find Your Dream Job
+                @endif
+             </h1>
             <p class="text-lg mb-12">Find a job that suits your interest & skills.</p>
-
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-24">
                 <!-- Live Jobs Card -->
