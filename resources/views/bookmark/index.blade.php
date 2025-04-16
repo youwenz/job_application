@@ -23,8 +23,7 @@
 
                     <div class="mt-4 md:mt-0 flex flex-col items-center">
                         @php
-                            $defaultUserId = 1; // Temporary user ID
-                            $isBookmarked = \App\Models\Bookmark::where('user_id', $defaultUserId)
+                            $isBookmarked = \App\Models\Bookmark::where('user_id', $user->id)
                                 ->where('job_id', $bookmark->job->id)
                                 ->exists();
                         @endphp

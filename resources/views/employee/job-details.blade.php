@@ -1,6 +1,5 @@
 @php
-    $dummyUserId = 1; // Simulated logged-in user ID
-   $isBookmarked = $jobListing->bookmarkedByUsers->contains($dummyUserId);
+    $isBookmarked = Auth::user()?->bookmarks()->where('job_id', $jobListing->id)->exists();
 @endphp
 <x-employee-layout>
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 m-5">
@@ -17,8 +16,7 @@
                     <a href="{{ route('jobListings.apply.form', ['jobId' => $jobListing->id]) }}"
                        class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">Apply Now</a>
                     @php
-                        $defaultUserId = 1; // Temporary user ID
-                        $isBookmarked = \App\Models\Bookmark::where('user_id', $defaultUserId)->where('job_id', $jobListing->id)->exists();
+                        $isBookmarked = Auth::user()?->bookmarks()->where('job_id', $jobListing->id)->exists();
                     @endphp
 
                         <!-- Bookmark Button -->

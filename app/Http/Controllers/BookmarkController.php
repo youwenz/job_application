@@ -17,7 +17,7 @@ class BookmarkController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('bookmark.index', compact('bookmarks'));
+        return view('bookmark.index', compact('bookmarks', 'user'));
     }
 
     public function save($jobId)
