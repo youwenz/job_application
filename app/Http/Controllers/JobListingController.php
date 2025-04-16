@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\JobListing;
@@ -41,12 +42,21 @@ class JobListingController extends Controller
 
         // Filter by Remote Jobs
         if ($request->filled('remote') && $request->input('remote') == '1') {
-            $query->where('remote', true); 
+            $query->where('remote', true);
         }
 
         $jobListings = $query->paginate(9);
 
-        return view('employee.job-listing', compact('jobListings'));
+        // Fetch recent job IDs from cookie
+        $recentJobs = json_decode(Cookie::get('recent_jobs', '[]'), true);
+
+        // Fetch jobs from DB while preserving the order
+        $recentlyViewed = JobListing::whereIn('id', $recentJobs)->get()->sortBy(function ($job) use ($recentJobs) {
+            return array_search($job->id, $recentJobs);
+        });
+
+
+        return view('employee.job-listing', compact('jobListings'), compact('recentlyViewed'));
     }
 
     public function show($jobId)
@@ -60,7 +70,20 @@ class JobListingController extends Controller
 
         Log::info('JobListing found:', ['id' => $jobListing->id, 'title' => $jobListing->title]);
 
-        return view('employee.job-details', compact('jobListing')); 
+        // Get current recently viewed jobs from cookie
+        $recentJobs = json_decode(Cookie::get('recent_jobs', '[]'), true);
+
+        // Add the current job ID to the front
+        array_unshift($recentJobs, $jobId);
+
+        // Remove duplicates & limit to last 5
+        $recentJobs = array_unique($recentJobs);
+        $recentJobs = array_slice($recentJobs, 0, 5);
+
+        // Store back in the cookie for 7 days
+        Cookie::queue('recent_jobs', json_encode($recentJobs), 60 * 24 * 7);
+
+        return view('employee.job-details', compact('jobListing'));
     }
 
 }

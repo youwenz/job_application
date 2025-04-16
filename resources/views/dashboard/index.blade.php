@@ -57,7 +57,7 @@
     <div class="w-full bg-white flex justify-center items-center flex-row mt-16 py-12">
         <!-- Candidate Card -->
         <div
-            class="w-[40%] h-65 rounded-lg bg-primary bg-cover bg-center flex flex-col mx-8 bg-[url('/public/images/office-background.jpg')] relative">
+            class="w-[40%] h-[300px] rounded-lg bg-primary bg-cover bg-center flex flex-col mx-8 bg-[url('/public/images/office-background.jpg')] relative">
             <!-- Overlay for better text visibility -->
             <div class="absolute inset-0 bg-black opacity-50 z-0 rounded-lg"></div>
             <div class="w-full h-full rounded-2xl flex flex-col justify-center space-y-4 p-4 pl-[10%] z-10">
@@ -76,7 +76,7 @@
         </div>
         <!-- Candidate Card -->
         <div
-            class="w-[40%] h-65 rounded-lg bg-primary bg-fit bg-center flex flex-col mx-8 bg-[url('/public/images/employer-bg.jpg')] relative">
+            class="w-[40%] h-[300px] rounded-lg bg-primary bg-fit bg-center flex flex-col mx-8 bg-[url('/public/images/employer-bg.jpg')] relative">
             <!-- Overlay for better text visibility -->
             <div class="absolute inset-0 bg-black opacity-50 z-0 rounded-lg"></div>
             <div class="w-full h-full rounded-2xl flex flex-col justify-center space-y-4 p-4 pl-[10%] z-10">
