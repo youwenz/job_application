@@ -63,7 +63,7 @@ Route::middleware(['auth', 'role:employee'])->group(function () {
     // Bookmarks
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
     Route::post('/jobs/{jobId}/bookmark', [BookmarkController::class, 'save'])->name('jobListings.bookmark');
-    Route::delete('/jobs/{jobId}/bookmark', [BookmarkController::class, 'remove'])->name('jobListings.bookmark.remove');
+    Route::delete('/jobs/{jobId}/bookmark', [BookmarkController::class, 'delete'])->name('jobListings.bookmark.remove');
 
     // Job Applications
     Route::get('/applications', [JobApplicationController::class, 'index'])->name('jobApplication.index');

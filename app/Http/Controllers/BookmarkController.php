@@ -36,7 +36,7 @@ class BookmarkController extends Controller
         return redirect()->back()->with('success', 'Job saved to bookmarks!');
     }
 
-    public function remove($jobId)
+    public function delete($jobId)
     {
         $user = Auth::user(); 
 
