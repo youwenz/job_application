@@ -46,7 +46,7 @@ class JobController extends Controller
 
         // Use auth()->id() for the user_id
         JobListing::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
             'salary' => $request->salary,
@@ -56,13 +56,15 @@ class JobController extends Controller
             'benefits' => $request->benefits,
         ]);
 
-        return redirect()->route('jobs.show')->with('success', 'Job created successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job created successfully!');
     }
 
     // Show all jobs created by a specific user
     public function show($userId)
     {
-        $jobs = JobListing::where('user_id', $userId)->paginate(10);
+        $jobs = JobListing::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('jobs.show', compact('jobs'));
     }
@@ -91,7 +93,7 @@ class JobController extends Controller
         // Update the job details
         $job->update($request->all());
 
-        return redirect()->route('jobs.show')->with('success', 'Job updated successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job updated successfully!');
     }
 
     // Delete job listing
@@ -106,6 +108,6 @@ class JobController extends Controller
         // Delete the job
         $job->delete();
 
-        return redirect()->route('jobs.show')->with('success', 'Job deleted successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job updated successfully!');
     }
 }

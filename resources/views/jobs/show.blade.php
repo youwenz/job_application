@@ -25,11 +25,17 @@
                             <strong>Applicants:</strong> {{ $job->applications ? $job->applications->count() : 0 }}
                             people applied</p>
 
-                        <details class="mt-2 text-sm text-gray-700">
+                        <details class="mt-2 text-sm text-gray-700" onclick="event.stopPropagation()">
                             <summary class="cursor-pointer text-blue-500 font-semibold">View More</summary>
                             <p class="mt-1"><strong>Requirements:</strong> {{ Str::limit($job->requirements, 150) }}</p>
                             <p class="mt-1"><strong>Benefits:</strong> {{ Str::limit($job->benefits, 150) }}</p>
                         </details>
+
+                        <a href="{{ route('jobListings.details', $job->id) }}"
+                            class="mt-3 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                            View Details
+                        </a>
+
 
                         @can('update', $job)
                             <!-- Link to view applicants -->

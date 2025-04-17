@@ -1,9 +1,7 @@
 @php
-    //$user = Auth::user();
-    use App\Models\User;
-    $dummyUserId = 1; // Simulated logged-in user ID
-    $user = User::find($dummyUserId);
+    $user = Auth::user();
 @endphp
+
 <x-employee-layout>
     <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 m-5">
         <h1 class="text-2xl font-bold text-gray-800">Apply for {{ $jobListing->title }}</h1>
