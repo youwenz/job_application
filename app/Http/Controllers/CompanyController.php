@@ -80,22 +80,22 @@ class CompanyController extends Controller
         return view('companies.edit', compact('company'));
     }
     public function update(Request $request, $id)
-{
-    $company = Company::findOrFail($id);
-    $this->authorize('update', $company);
-    // Fill the model with new data
-    $company->fill($request->except(['_token', '_method']));
-    $company->save();
-    return redirect()->route('companies.view', $company->id)
-            ->with('success', 'Company updated successfully.');
-}
-
-    // Delete company
-    public function deleteCompany($id) {
+    {
         $company = Company::findOrFail($id);
-        $this->authorize('delete', $company);
-        $company->delete();
-        return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
+        $this->authorize('update', $company);
+        // Fill the model with new data
+        $company->fill($request->except(['_token', '_method']));
+        $company->save();
+        return redirect()->route('companies.view', $company->id)
+                ->with('success', 'Company updated successfully.');
     }
+
+//     // Delete company
+//     public function deleteCompany($id) {
+//         $company = Company::findOrFail($id);
+//         $this->authorize('delete', $company);
+//         $company->delete();
+//         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
+//     }
 }
 
