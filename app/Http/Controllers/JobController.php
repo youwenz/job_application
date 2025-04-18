@@ -13,12 +13,6 @@ class JobController extends Controller
 {
     use AuthorizesRequests;
 
-    public function __construct()
-    {
-        // Apply auth middleware later when authentication is implemented
-        // $this->middleware('auth');
-    }
-
     // Show create job form
     public function create()
     {
@@ -44,7 +38,6 @@ class JobController extends Controller
             'benefits' => 'nullable|string',
         ]);
 
-        // Use auth()->id() for the user_id
         JobListing::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
@@ -72,7 +65,6 @@ class JobController extends Controller
     // Show edit form
     public function edit($id)
     {
-        // Replace hardcoded user_id with auth()->id()
         $job = JobListing::find($id);
 
         // Show the edit form only when the job is created by the currently logged in user
@@ -108,6 +100,6 @@ class JobController extends Controller
         // Delete the job
         $job->delete();
 
-        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job updated successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job deleted successfully!');
     }
 }

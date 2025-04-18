@@ -108,7 +108,7 @@
 
                     <div class="mt-3 flex space-x-2">
                         <button type="submit" class="bg-blue-600 text-white py-3 px-6 w-full rounded-lg">Save Changes</button>
-                        <a href="{{ route('companies.showEmployer', $company->id) }}" class="bg-gray-400 text-white py-3 px-6 w-full rounded-lg text-center">Cancel</a>
+                        <a href="{{ route('companies.view', $company->id) }}" class="bg-gray-400 text-white py-3 px-6 w-full rounded-lg text-center">Cancel</a>
                     </div>
                 </div>
             </div>
