@@ -20,8 +20,7 @@
         </div>
 
         @php
-            $defaultUserId = 1; // Temporary user ID
-            $isBookmarked = \App\Models\Bookmark::where('user_id', $defaultUserId)->where('job_id', $jobListing->id)->exists();
+            $isBookmarked = Auth::user()?->bookmarks()->where('job_id', $jobListing->id)->exists();
         @endphp
 
         <!-- Bookmark Button -->

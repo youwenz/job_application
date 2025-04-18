@@ -6,14 +6,16 @@ use App\Models\Company;
 use App\Models\JobListing;
 use App\Models\User;
 use App\Policies\CompanyPolicy;
-use App\Policies\JobPolicy;
+use App\Policies\JobListingPolicy;
 use Illuminate\Auth\Access\Gate;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
+
     protected $policies = [
-        JobListing::class => JobPolicy::class,
+        JobListing::class => JobListingPolicy::class,
         Company::class => CompanyPolicy::class
     ];
 
@@ -31,15 +33,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
-        Gate::define('edit-job', function (User $user, JobListing $job) {
-            return $user->id === $job -> user_id;
-        });
-        // Gate::define('update', function (User $user, JobListing $job) {
-        //     return $user->id === $job->user_id;
-        // });
 
-        // Gate::define('delete', function (User $user, JobListing $job) {
-        //     return $user->id === $job->user_id;
-        // });
+        Gate::define('isEmployee', fn (Authenticatable $user) => true);
+        Gate::define('isEmployer', fn (Authenticatable $user) => true);
     }
+
+
 }

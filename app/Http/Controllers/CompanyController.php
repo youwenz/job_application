@@ -22,10 +22,14 @@ class CompanyController extends Controller
 
     // Display the form to create a company
     public function create() {
+        // Ensure that only employer can create a company
         $this->authorize('create', Company::class);
+
+        // Redirect to company view if company already exist
         if(auth()->user()->company) {
             return redirect(route('companies.view', auth()->user()->company->id));
         }
+
         return view('companies.create');
     }
 
@@ -63,18 +67,10 @@ class CompanyController extends Controller
     }
 
     // Show company details for employees
-    public function viewCompany()
+    public function viewCompany($id)
     {
-        $company = Company::where('user_id', auth()->id())->firstOrFail(); // Get the user's company
+        $company = Company::find($id); // Get the user's company
         return view('companies.show', compact('company'));
-    }
-
-
-    // Show company details for employers
-    public function viewCompanyEmployer()
-    {
-        $company = Company::where('user_id', auth()->id())->firstOrFail(); // Get the user's company
-        return view('companies.showEmployer', compact('company'));
     }
 
     // Show edit form

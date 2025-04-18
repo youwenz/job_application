@@ -46,7 +46,7 @@ class JobController extends Controller
 
         // Use auth()->id() for the user_id
         JobListing::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
             'salary' => $request->salary,
@@ -56,39 +56,27 @@ class JobController extends Controller
             'benefits' => $request->benefits,
         ]);
 
-        return redirect()->route('jobs.show')->with('success', 'Job created successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job created successfully!');
     }
 
     // Show all jobs created by a specific user
-    public function show()
+    public function show($userId)
     {
-        // Use auth()->id() to get the current user's jobs
-        $jobs = JobListing::where('user_id', auth()->id())->paginate(10);
+        $jobs = JobListing::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('jobs.show', compact('jobs'));
     }
-    // public function show()
-    // {
-    //     // Get the current user's jobs
-    //     $jobs = JobListing::where('user_id', auth()->id())->paginate(10);
-
-    //     // Test the gate manually by checking if the user can update any job
-    //     $job = $jobs->first(); // Check the first job
-    //     if ($job && !Gate::allows('update', $job)) {
-    //         // If the user cannot update the job, throw a 403 error
-    //         abort(403, 'You are not authorized to update this job');
-    //     }
-
-    //     // Return the jobs if the policy allows
-    //     return view('jobs.show', compact('jobs'));
-    // }
-
 
     // Show edit form
     public function edit($id)
     {
         // Replace hardcoded user_id with auth()->id()
-        $job = JobListing::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $job = JobListing::find($id);
+
+        // Show the edit form only when the job is created by the currently logged in user
+        $this->authorize('update', $job);
 
         return view('jobs.edit', compact('job'));
     }
@@ -97,23 +85,29 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         // Find the job by ID and ensure it belongs to the authenticated user
-        $job = JobListing::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $job = JobListing::find($id);
+
+        // Allows editing when the job is created by the currently logged in user
+        $this->authorize('update', $job);
 
         // Update the job details
         $job->update($request->all());
 
-        return redirect()->route('jobs.show')->with('success', 'Job updated successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job updated successfully!');
     }
 
     // Delete job listing
     public function delete($id)
     {
         // Ensure that the job belongs to the authenticated user
-        $job = JobListing::where('user_id', auth()->id())->findOrFail($id);
+        $job = JobListing::find($id);
+
+        // Allows deletion when the job is created by the currently logged in user
+        $this->authorize('delete', $job);
 
         // Delete the job
         $job->delete();
 
-        return redirect()->route('jobs.show')->with('success', 'Job deleted successfully!');
+        return redirect()->route('jobs.show', ['id' => Auth::id()])->with('success', 'Job updated successfully!');
     }
 }

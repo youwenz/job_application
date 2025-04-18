@@ -1,7 +1,13 @@
 <x-employer-layout>
     <div class="w-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient-x text-white py-20">
         <div class="container mx-auto px-4 text-center">
-            <h1 class="text-5xl font-extrabold mb-6">Create Your Own Company</h1>
+            <h1 class="text-5xl font-extrabold mb-6">
+                @if(session('username'))
+                    Hello {{ session('username') }}, Create Your Own Company
+                @else
+                    Create Your Own Company
+                @endif
+                </h1>
             <p class="text-lg mb-12">Start building your dream company and hire the best talent.</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16 max-w-4xl mx-auto">
