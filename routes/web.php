@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
     Route::prefix('companies/jobs')->name('jobs.')->group(function () {
         Route::get('/create', [JobController::class, 'create'])->name('create');
         Route::post('/create', [JobController::class, 'store'])->name('store');
-        Route::get('/show', [JobController::class, 'show'])->name('show');
+        Route::get('/{id}', [JobController::class, 'show'])->name('show');
         Route::get('/{id}/edit', [JobController::class, 'edit'])->name('edit'); // Show edit form
         Route::put('/{id}', [JobController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [JobController::class, 'delete'])->name('delete');
@@ -52,8 +52,7 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
         Route::get('/', [CompanyController::class, 'index'])->name('index'); // Home Page
         Route::get('/create', [CompanyController::class, 'create'])->name('create'); // Create form
         Route::post('/', [CompanyController::class, 'store'])->name('store'); // Store company
-        Route::get('/showEmployer', [CompanyController::class, 'viewCompanyEmployer'])->name('showEmployer');
-        Route::get('/view/{id}', [CompanyController::class, 'viewCompany'])->name('view');
+        Route::get('/view/{userId}', [CompanyController::class, 'viewCompany'])->name('view');
         Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('edit'); // Edit company form
         Route::put('/{id}', [CompanyController::class, 'update'])->name('update');// Update company
     });
@@ -64,7 +63,7 @@ Route::middleware(['auth', 'role:employee'])->group(function () {
     // Bookmarks
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
     Route::post('/jobs/{jobId}/bookmark', [BookmarkController::class, 'save'])->name('jobListings.bookmark');
-    Route::delete('/jobs/{jobId}/bookmark', [BookmarkController::class, 'remove'])->name('jobListings.bookmark.remove');
+    Route::delete('/jobs/{jobId}/bookmark', [BookmarkController::class, 'delete'])->name('jobListings.bookmark.remove');
 
     // Job Applications
     Route::get('/applications', [JobApplicationController::class, 'index'])->name('jobApplication.index');
@@ -75,6 +74,7 @@ Route::middleware(['auth', 'role:employee'])->group(function () {
     Route::prefix('companies')->name('companies.')->group(function () {
         Route::get('/list', [CompanyController::class, 'list'])->name('list'); // List companies
         Route::get('/{id}', [CompanyController::class, 'viewCompany'])->name('show'); // View company
+        Route::get('/{userId}/jobs', [JobController::class, 'show'])->name('jobs');
     });
 });
 

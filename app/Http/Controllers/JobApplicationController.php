@@ -4,15 +4,18 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\JobListing;
 use App\Models\JobApplication;
+use Illuminate\Support\Facades\Auth;
 
 class JobApplicationController extends Controller
 {
 
     public function index()
     {
-        $jobApplications = JobApplication::with('job.user.company')
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
+        $user = Auth::user(); 
+        $jobApplications = $user->jobApplications() 
+            ->with('job.user.company')              
+            ->orderBy('created_at', 'desc')         
+            ->paginate(5);                          
 
         return view('jobApplication.index', compact('jobApplications'));
     }
@@ -38,18 +41,13 @@ class JobApplicationController extends Controller
             'message' => 'nullable|string',
         ]);
 
-        // Store Resume
         $resumePath = $request->file('resume_path')->store('resumes', 'public');
 
-        // Temporary user_id assignment (for testing)
-        $dummyUserId = 1;
+        $user = Auth::user();
 
-        Log::info('Request found:', ['request:', $request->all()]);
-
-        // Save Application
         JobApplication::create([
             'job_id' => $jobListing->id,
-            'user_id' => $dummyUserId,
+            'user_id' => $user->id,
             'full_name' => $request->full_name,
             'email' => $request->email,
             'resume_path' => $resumePath,

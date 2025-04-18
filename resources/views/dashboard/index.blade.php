@@ -2,9 +2,14 @@
     <div
         class="w-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-gradient-x text-white">
         <div class="container mx-auto px-4 py-20 text-center">
-            <h1 class="text-5xl font-extrabold mb-6">Find Your Dream Job</h1>
+            <h1 class="text-5xl font-extrabold mb-6">
+                @if(session('username'))
+                    Hello {{ session('username') }}, Find Your Dream Job
+                @else
+                    Find Your Dream Job
+                @endif
+             </h1>
             <p class="text-lg mb-12">Find a job that suits your interest & skills.</p>
-
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-24">
                 <!-- Live Jobs Card -->
@@ -57,7 +62,7 @@
     <div class="w-full bg-white flex justify-center items-center flex-row mt-16 py-12">
         <!-- Candidate Card -->
         <div
-            class="w-[40%] h-65 rounded-lg bg-primary bg-cover bg-center flex flex-col mx-8 bg-[url('/public/images/office-background.jpg')] relative">
+            class="w-[40%] h-[300px] rounded-lg bg-primary bg-cover bg-center flex flex-col mx-8 bg-[url('/public/images/office-background.jpg')] relative">
             <!-- Overlay for better text visibility -->
             <div class="absolute inset-0 bg-black opacity-50 z-0 rounded-lg"></div>
             <div class="w-full h-full rounded-2xl flex flex-col justify-center space-y-4 p-4 pl-[10%] z-10">
@@ -76,7 +81,7 @@
         </div>
         <!-- Candidate Card -->
         <div
-            class="w-[40%] h-65 rounded-lg bg-primary bg-fit bg-center flex flex-col mx-8 bg-[url('/public/images/employer-bg.jpg')] relative">
+            class="w-[40%] h-[300px] rounded-lg bg-primary bg-fit bg-center flex flex-col mx-8 bg-[url('/public/images/employer-bg.jpg')] relative">
             <!-- Overlay for better text visibility -->
             <div class="absolute inset-0 bg-black opacity-50 z-0 rounded-lg"></div>
             <div class="w-full h-full rounded-2xl flex flex-col justify-center space-y-4 p-4 pl-[10%] z-10">

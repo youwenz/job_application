@@ -11,7 +11,7 @@
                             <label onclick="toggleFilter('tags')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 w-full block">Tags</label>
                             <div id="tags"
-                                 class="hidden space-y-1 p-2 rounded bg-gray-100 grid grid-cols-2 gap-x-6 gap-y-2">
+                                 class="hidden p-2 rounded bg-gray-100 grid grid-cols-2 gap-x-6 gap-y-2">
                                 @foreach ($tags as $tag)
                                     <div class="flex items-center gap-2 mb-4 pl-4">
                                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
@@ -29,7 +29,7 @@
                             <label onclick="toggleFilter('states')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 w-full block">States</label>
                             <div id="states"
-                                 class="hidden space-y-1 p-2 rounded bg-gray-100 grid grid-cols-2 gap-x-6 gap-y-2">
+                                 class="hidden p-2 rounded bg-gray-100 grid grid-cols-2 gap-x-6 gap-y-2">
                                 @foreach ($states as $state)
                                     <div class="flex items-center gap-2 mb-4 pl-4">
                                         <input type="checkbox" name="states[]" value="{{ $state }}" id="{{ $state }}"
@@ -78,7 +78,7 @@
                             <label onclick="toggleFilter('jobType')"
                                    class="cursor-pointer font-bold px-4 py-4 hover:bg-blue-100 block w-full">Job
                                 Type</label>
-                            <div id="jobType" class="hidden space-y-2 grid grid-cols-2 p-2 rounded bg-gray-100">
+                            <div id="jobType" class="hidden grid grid-cols-2 p-2 rounded bg-gray-100">
                                 @foreach (['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship', 'Volunteer', 'On-Call'] as $type)
                                     <div class="flex items-center gap-2 mb-4 pl-4">
                                         <input type="checkbox" name="states[]" value="{{ $type }}" id="{{ $type }}"
@@ -92,7 +92,7 @@
 
                         <!-- Submit Button -->
                         <div class="flex justify-center">
-                            <button type="submit" class="bg-secondary text-white py-2 px-10 rounded-lg mt-6 mb-6">Filter
+                            <button type="submit" class="bg-secondary border bg-blue-100 font-bold py-2 px-10 rounded-lg mt-6 mb-6">Filter
                             </button>
                         </div>
                     </div>
