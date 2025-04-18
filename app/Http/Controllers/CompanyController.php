@@ -76,12 +76,13 @@ class CompanyController extends Controller
     // Show edit form
     public function edit($id) {
         $company = Company::findOrFail($id);
+        $this->authorize('update', $company);
         return view('companies.edit', compact('company'));
     }
     public function update(Request $request, $id)
 {
     $company = Company::findOrFail($id);
-
+    $this->authorize('update', $company);
     // Fill the model with new data
     $company->fill($request->except(['_token', '_method']));
     $company->save();
@@ -92,6 +93,7 @@ class CompanyController extends Controller
     // Delete company
     public function deleteCompany($id) {
         $company = Company::findOrFail($id);
+        $this->authorize('delete', $company);
         $company->delete();
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }

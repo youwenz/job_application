@@ -43,7 +43,7 @@ class CompanyPolicy
     public function update(User $user, Company $company)
     {
         // Allow users to update only their own company
-        return $user->id === $company->user_id;
+        return $user->id == $company->user_id;
     }
 
     /**
@@ -52,6 +52,6 @@ class CompanyPolicy
     public function delete(User $user, Company $company)
     {
         // Allow users to delete only their own company
-        return $user->id === $company->user_id;
+        return $user->id == $company->user_id;
     }
 }
