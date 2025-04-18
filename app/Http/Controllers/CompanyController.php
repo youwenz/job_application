@@ -85,7 +85,7 @@ class CompanyController extends Controller
     // Fill the model with new data
     $company->fill($request->except(['_token', '_method']));
     $company->save();
-    return redirect()->route('companies.showEmployer', $company->id)
+    return redirect()->route('companies.view', $company->id)
             ->with('success', 'Company updated successfully.');
 }
 
@@ -96,3 +96,4 @@ class CompanyController extends Controller
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
 }
+
