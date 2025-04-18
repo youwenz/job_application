@@ -45,9 +45,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        return redirect()->route('login')->with('success', 'Account created successfully! <br>Log in now and start your journey with TalentHub.');
 
-        return redirect(session()->pull('url.intended', route('dashboard')));
     }
 
 }

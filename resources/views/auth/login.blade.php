@@ -1,5 +1,16 @@
 <x-guest-layout :pageTitle="'Welcome Back'">
-    <p class="text-center mb-4">New to TalentHub? <a href="{{route('register')}}" class="text-blue-600">Sign up for an account</a></p>
+
+    @if(session('success'))
+        <div class="mb-4 p-4 text-sm text-green-800 bg-green-100 border border-green-200 rounded-lg" role="alert">
+            {!! session('success') !!}
+        </div>
+    @else
+        <p class="text-center mb-4">
+            New to TalentHub? 
+            <a href="{{ route('register') }}" class="text-blue-600">Sign up for an account</a>
+        </p>
+    @endif
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
