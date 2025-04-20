@@ -71,19 +71,6 @@ class JobController extends Controller
         return view('jobs.show', compact('jobs'));
     }
 
-    // public function show($userId)
-    // {
-    //     $jobs = JobListing::with(['user', 'user.company'])
-    //                       ->where('user_id', $userId)
-    //                       ->orderBy('created_at', 'desc')
-    //                       ->paginate(10);
-
-    //     return view('jobs.show', compact('jobs'));
-    // }
-
-
-
-
     // Show edit form
     public function edit($id)
     {
