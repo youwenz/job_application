@@ -60,6 +60,14 @@ Route::middleware(['auth', 'role:employer'])->group(function () {
 
 // Employee-only routes
 Route::middleware(['auth', 'role:employee'])->group(function () {
+    //job searching
+    Route::get('/jobs/search', [SearchController::class, 'index'])->name('search.index');
+    Route::get('/search', [SearchController::class, 'search'])->name('search.search');
+
+    // Job Listings & Details
+    Route::get('/jobs', [JobListingController::class, 'index'])->name('jobListings.index');
+    Route::get('/jobs/{jobId}', [JobListingController::class, 'show'])->name('jobListings.details');
+
     // Bookmarks
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
     Route::post('/jobs/{jobId}/bookmark', [BookmarkController::class, 'save'])->name('jobListings.bookmark');
@@ -112,14 +120,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/user/password', [PasswordController::class, 'update'])->name('password.update');
 });
-
-//job searching
-Route::get('/jobs/search', [SearchController::class, 'index'])->name('search.index');
-Route::get('/search', [SearchController::class, 'search'])->name('search.search');
-
-// Job Listings & Details
-Route::get('/jobs', [JobListingController::class, 'index'])->name('jobListings.index');
-Route::get('/jobs/{jobId}', [JobListingController::class, 'show'])->name('jobListings.details');
 
 require __DIR__.'/auth.php';
 
