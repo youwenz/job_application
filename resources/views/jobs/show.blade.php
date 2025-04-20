@@ -6,7 +6,7 @@
     <div class="container mx-auto p-6">
         @if ($jobs->isEmpty())
             <!-- No jobs found message -->
-            <p class="text-center text-gray-500 mt-6">You haven't created any jobs yet.</p>
+            <p class="text-center text-gray-500 mt-6">No job found.</p>
         @else
             <h2 class="text-2xl font-bold mb-6">
                 {{ $jobs->first()->user && $jobs->first()->user->company ? $jobs->first()->user->company->name : 'No company associated' }} - Job Listings
