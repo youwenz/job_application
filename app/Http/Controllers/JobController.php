@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\JobListing;
 use Illuminate\Support\Facades\Gate;
-use App\Models\User;
+use App\Models\Company; // Add the Company model
 use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
