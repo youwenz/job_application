@@ -45,13 +45,4 @@ class CompanyPolicy
         // Allow users to update only their own company
         return $user->id == $company->user_id;
     }
-
-    /**
-     * Determine whether the user can delete the company.
-     */
-    public function delete(User $user, Company $company)
-    {
-        // Allow users to delete only their own company
-        return $user->id == $company->user_id;
-    }
 }

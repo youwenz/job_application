@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\JobListing;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Company; // Add the Company model
+use App\Models\User; // Add the Company model
 use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
@@ -55,6 +55,15 @@ class JobController extends Controller
     // Show all jobs created by a specific user
     public function show($userId)
     {
+        $user = User::findOrFail($userId);
+
+        // Check if the employer has a company
+        if (!$user->company) {
+            // Redirect to company creation page with a custom error message
+            return redirect()->route('companies.create')
+                ->with('error', 'Please create your company first before creating a job.');
+        }
+
         $jobs = JobListing::where('user_id', $userId)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
