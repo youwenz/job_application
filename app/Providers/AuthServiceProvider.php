@@ -34,8 +34,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('isEmployee', fn (Authenticatable $user) => true);
-        Gate::define('isEmployer', fn (Authenticatable $user) => true);
+        Gate::define('isEmployer', function (User $user) {
+            return $user->role === 'employer';
+        });
+
+        Gate::define('isEmployee', function (User $user) {
+            return $user->role === 'employee';
+        });
     }
 
 

@@ -40,17 +40,8 @@
             <option value="part-time" {{ request('job_type') == 'part-time' ? 'selected' : '' }}>Part-Time</option>
             <option value="contract" {{ request('job_type') == 'contract' ? 'selected' : '' }}>Contract</option>
             <option value="internship" {{ request('job_type') == 'internship' ? 'selected' : '' }}>Internship</option>
-        </select>
-
-        <!-- Custom Dropdown Arrow -->
-        <div class="absolute inset-y-0 right-6 flex items-center pointer-events-none">
-            <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-        </div>
+        </select>        
     </div>
-
-
 
     <!-- Remote Jobs Checkbox -->
     <div class="hidden sm:flex items-center px-3">
